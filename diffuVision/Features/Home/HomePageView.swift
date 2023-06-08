@@ -51,8 +51,7 @@ struct HomePageView: View {
 				// MARK: - Generated Image
 
 				ScrollView(.vertical) {
-					if true {
-//					if viewModel.showGeneratedImageItemView() {
+					if viewModel.showGeneratedImageItemView() {
 						GeneratedImageItemView(model: GeneratedImageItemModel(
 							promtMessage: viewModel.generatedImageItemModel.promtMessage,
 							response: viewModel.generatedImageItemModel.response))
