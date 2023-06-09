@@ -23,7 +23,7 @@ struct MainTabView: View {
 
 			NavigationView {
 				HomePageView()
-					.navigationTitle(LocalizationKeys.Keys.appTitle.rawValue.localizedString())
+					.navigationTitle(LocalizationStrings.appTitle)
 					.navigationBarTitleDisplayMode(.inline)
 //					.background(Gradient(colors: [.]))
 			}
@@ -36,7 +36,7 @@ struct MainTabView: View {
 
 			NavigationView {
 				SettingsPageView()
-					.navigationTitle(LocalizationKeys.Keys.tabSettings.rawValue.localizedString())
+					.navigationTitle(LocalizationStrings.tabSettings)
 					.navigationBarTitleDisplayMode(.inline)
 					.background(Color.clear)
 			}

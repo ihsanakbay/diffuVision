@@ -17,7 +17,7 @@ struct HomePageView: View {
 
 			VStack {
 				HStack {
-					Text(LocalizationKeys.Keys.selectSize.rawValue.localizedString())
+					Text(LocalizationStrings.selectSize)
 						.padding(8)
 					Spacer()
 					Picker("",
@@ -33,7 +33,7 @@ struct HomePageView: View {
 				.modifier(CustomListItemModifier())
 
 				HStack {
-					Text(LocalizationKeys.Keys.selectEngine.rawValue.localizedString())
+					Text(LocalizationStrings.selectEngine)
 						.padding(8)
 					Spacer()
 					Picker("",
@@ -57,7 +57,9 @@ struct HomePageView: View {
 							response: viewModel.generatedImageItemModel.response))
 							.padding()
 					} else {
-						EmptyView()
+						Text(LocalizationStrings.dashboardTitle)
+							.multilineTextAlignment(.center)
+							.padding(20)
 					}
 				}
 
@@ -80,7 +82,7 @@ struct HomePageView: View {
 
 			if viewModel.isGenerating {
 				ProgressView {
-					Text(LocalizationKeys.Keys.generateImage.rawValue.localizedString())
+					Text(LocalizationStrings.generateImage)
 						.foregroundColor(Color.labelColor.opacity(0.5))
 				}
 			} else { EmptyView() }

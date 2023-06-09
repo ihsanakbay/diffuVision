@@ -22,7 +22,7 @@ struct GeneratedImageButtonView: View {
 
 			CustomImageItemButtonView(action: saveAction,
 			                          icon: Icons.Button.download.rawValue,
-			                          label: LocalizationKeys.Keys.save.rawValue,
+									  label: LocalizationStrings.save,
 			                          tintColor: Color.iconColor,
 			                          foregroundColor: .white)
 		}

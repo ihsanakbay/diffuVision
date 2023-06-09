@@ -15,7 +15,7 @@ struct GeneratedImagePromptMessageView: View {
 			Color.cardBackground
 
 			VStack(spacing: 12) {
-				Text("lalalalaldfkmofdgkmfdgnfdg,,nfdg,ndfgdfbdm vmnvcvm, fm kbfdmfgm kcfgmc gfcbm kcbvm cghm csfkmogfdkmgfd,df,g,fdnfg dfgddfla")
+				Text(text)
 					.padding(12)
 					.font(.caption)
 					.foregroundColor(.white)

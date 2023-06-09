@@ -19,7 +19,7 @@ struct CustomImageItemButtonView: View {
 			if let label = label,
 			   label != ""
 			{
-				Label(label.localizedString(), systemImage: icon)
+				Label(label, systemImage: icon)
 			} else {
 				Image(systemName: icon)
 			}

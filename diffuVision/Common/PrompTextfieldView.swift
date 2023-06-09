@@ -17,7 +17,7 @@ struct PrompTextfieldView: View {
 			HStack {
 				// MARK: - Prompt textfield
 
-				TextField(LocalizationKeys.Keys.prompt.rawValue.localizedString(),
+				TextField(LocalizationStrings.prompt,
 				          text: $prompt.max(300),
 				          axis: .vertical)
 					.foregroundColor(.labelColor)
