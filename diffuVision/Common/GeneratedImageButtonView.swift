@@ -18,12 +18,12 @@ struct GeneratedImageButtonView: View {
 			                          icon: Icons.Button.share.rawValue,
 			                          label: "",
 			                          tintColor: Color.white,
-			                          foregroundColor: Color.iconColor)
+			                          foregroundColor: Colors.buttonColor.swiftUIColor)
 
 			CustomImageItemButtonView(action: saveAction,
 			                          icon: Icons.Button.download.rawValue,
-			                          label: LocalizationKeys.Keys.save.rawValue,
-			                          tintColor: Color.iconColor,
+			                          label: LocalizationStrings.save,
+			                          tintColor: Colors.buttonColor.swiftUIColor,
 			                          foregroundColor: .white)
 		}
 		.padding([.bottom, .trailing])

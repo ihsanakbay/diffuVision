@@ -17,7 +17,7 @@ struct HomePageView: View {
 
 			VStack {
 				HStack {
-					Text(LocalizationKeys.Keys.selectSize.rawValue.localizedString())
+					Text(LocalizationStrings.selectSize)
 						.padding(8)
 					Spacer()
 					Picker("",
@@ -27,23 +27,21 @@ struct HomePageView: View {
 							Text("\(size.width) x \(size.height)")
 						}
 					}
-					.pickerStyle(.navigationLink)
+					.pickerStyle(.menu)
 					.padding(8)
 				}
 				.modifier(CustomListItemModifier())
 
 				HStack {
-					Text(LocalizationKeys.Keys.selectEngine.rawValue.localizedString())
+					Text(LocalizationStrings.selectEngine)
 						.padding(8)
 					Spacer()
-					Picker("",
-					       selection: $viewModel.selectedEngineId)
-					{
+					Picker("", selection: $viewModel.selectedEngineId) {
 						ForEach(viewModel.engines, id: \.id) { engine in
 							Text("\(engine.name)")
 						}
 					}
-					.pickerStyle(.navigationLink)
+					.pickerStyle(.menu)
 					.padding(8)
 				}
 				.modifier(CustomListItemModifier())
@@ -57,7 +55,9 @@ struct HomePageView: View {
 							response: viewModel.generatedImageItemModel.response))
 							.padding()
 					} else {
-						EmptyView()
+						Text(LocalizationStrings.dashboardTitle)
+							.multilineTextAlignment(.center)
+							.padding(20)
 					}
 				}
 
@@ -66,8 +66,10 @@ struct HomePageView: View {
 				PrompTextfieldView(prompt: $prompt) {
 					viewModel.clearAll()
 					viewModel.generateImage()
+					prompt = ""
 				}
 			}
+			.foregroundColor(Colors.textColor.swiftUIColor)
 			.disabled(viewModel.isGenerating)
 			.onAppear(perform: {
 				viewModel.fetchEngineList()
@@ -80,9 +82,10 @@ struct HomePageView: View {
 
 			if viewModel.isGenerating {
 				ProgressView {
-					Text(LocalizationKeys.Keys.generateImage.rawValue.localizedString())
-						.foregroundColor(Color.labelColor.opacity(0.5))
+					Text(LocalizationStrings.generateImage)
+						.foregroundColor(Colors.textColor.swiftUIColor)
 				}
+				.tint(Colors.buttonColor.swiftUIColor)
 			} else { EmptyView() }
 		}
 	}
@@ -91,9 +94,10 @@ struct HomePageView: View {
 private struct CustomListItemModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
-			.background(Color.secondarySystemBackground)
+			.background(Colors.secondaryBackgroundColor.swiftUIColor)
 			.cornerRadius(10)
 			.padding([.horizontal], 16)
+			.tint(Colors.textColor.swiftUIColor)
 	}
 }
 

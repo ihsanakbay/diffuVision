@@ -7,11 +7,16 @@
 */
 
 "appTitle" = "diffuVision";
+"appDescription" = "AI Image Generator";
+"onboardMessage" = "Yaratıcı fikirlerinizi çarpıcı görüntülere dönüştürün";
+"getStarted" = "Başlayın";
+"dashboardTitle" = "Henüz bir resim oluşturmadınız.\nMetninizi girin ve fikirlerinizi resme dökün.";
 "tabSettings" = "Ayarlar";
 "save" = "Kaydet";
 "share" = "Paylaş";
+"doneButton" = "Tamam";
 "regenerate" = "Yenile";
-"prompt" = "Buraya isteminizi girin";
+"prompt" = "Buraya metninizi girin";
 
 "error" = "Beklenmedik bir hata oluştu";
 "unreachableError" = "İnternet bağlantınızı kontrol ediniz";

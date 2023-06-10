@@ -23,7 +23,7 @@ struct GeneratedImageItemView: View {
 				// MARK: - Text prompt message
 
 				GeneratedImagePromptMessageView(text: self.model.promtMessage ?? "")
-					.shadow(color: Color.imageBackground, radius: 10)
+					.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 					.padding([.bottom, .horizontal], 16)
 
 				// MARK: - Image
@@ -33,7 +33,7 @@ struct GeneratedImageItemView: View {
 						.resizable()
 						.scaledToFit()
 						.cornerRadius(10)
-						.shadow(color: Color.imageBackground, radius: 10)
+						.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 
 				} placeholder: {
 					ProgressView()

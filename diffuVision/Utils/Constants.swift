@@ -5,10 +5,16 @@
 //  Created by İhsan Akbay on 29.05.2023.
 //
 
-import Foundation
+import SwiftUI
 
 struct Constants {
+	static let screenWidth = UIScreen.main.bounds.width
+	static let screenHeight = UIScreen.main.bounds.height
 	static let engineId = "stable-diffusion-512-v2-1"
+}
+
+enum AppStorageKeys: String {
+	case isOnboarding
 }
 
 enum DefaultValues {

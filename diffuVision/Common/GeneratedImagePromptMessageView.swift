@@ -12,10 +12,10 @@ struct GeneratedImagePromptMessageView: View {
 
 	var body: some View {
 		ZStack {
-			Color.cardBackground
+			Colors.secondaryBackgroundColor.swiftUIColor
 
 			VStack(spacing: 12) {
-				Text("lalalalaldfkmofdgkmfdgnfdg,,nfdg,ndfgdfbdm vmnvcvm, fm kbfdmfgm kcfgmc gfcbm kcbvm cghm csfkmogfdkmgfd,df,g,fdnfg dfgddfla")
+				Text(text)
 					.padding(12)
 					.font(.caption)
 					.foregroundColor(.white)
@@ -24,7 +24,7 @@ struct GeneratedImagePromptMessageView: View {
 			}
 		}
 		.cornerRadius(10)
-		.shadow(color: Color.imageBackground, radius: 10)
+		.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 	}
 }
 

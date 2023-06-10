@@ -5,7 +5,6 @@
 //  Created by İhsan Akbay on 23.05.2023.
 //
 
-import RiveRuntime
 import SwiftUI
 
 enum TabItems {
@@ -15,7 +14,10 @@ enum TabItems {
 
 struct MainTabView: View {
 	@State private var selectedTab: TabItems = .image
-	private var background = RiveViewModel(fileName: "BackgroundAnimation")
+
+	init() {
+		UITabBar.appearance().unselectedItemTintColor = UIColor(asset: Colors.iconColor)
+	}
 
 	var body: some View {
 		TabView(selection: $selectedTab) {
@@ -23,9 +25,9 @@ struct MainTabView: View {
 
 			NavigationView {
 				HomePageView()
-					.navigationTitle(LocalizationKeys.Keys.appTitle.rawValue.localizedString())
+					.navigationTitle(LocalizationStrings.appTitle)
 					.navigationBarTitleDisplayMode(.inline)
-//					.background(Gradient(colors: [.]))
+					.background(Colors.backgroundColor.swiftUIColor)
 			}
 			.tag(TabItems.image)
 			.tabItem {
@@ -36,17 +38,16 @@ struct MainTabView: View {
 
 			NavigationView {
 				SettingsPageView()
-					.navigationTitle(LocalizationKeys.Keys.tabSettings.rawValue.localizedString())
+					.navigationTitle(LocalizationStrings.tabSettings)
 					.navigationBarTitleDisplayMode(.inline)
-					.background(Color.clear)
+					.background(Colors.backgroundColor.swiftUIColor)
 			}
 			.tag(TabItems.settings)
 			.tabItem {
 				Icons.TabView.settingsTab.image
 			}
 		}
-		.tint(.iconColor)
-		
+		.tint(Colors.buttonColor.swiftUIColor)
 	}
 }
 

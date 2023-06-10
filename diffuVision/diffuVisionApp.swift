@@ -5,14 +5,22 @@
 //  Created by İhsan Akbay on 23.05.2023.
 //
 
-import RiveRuntime
 import SwiftUI
 
 @main
 struct diffuVisionApp: App {
+	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool = true
+
 	var body: some Scene {
 		WindowGroup {
-			MainTabView()
+			if isOnboarding {
+				OnboardingView()
+					.preferredColorScheme(.dark)
+			}
+			else {
+				MainTabView()
+					.preferredColorScheme(.dark)
+			}
 		}
 	}
 }
