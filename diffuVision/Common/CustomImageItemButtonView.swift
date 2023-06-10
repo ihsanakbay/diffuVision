@@ -28,12 +28,12 @@ struct CustomImageItemButtonView: View {
 		.tint(tintColor)
 		.foregroundColor(foregroundColor)
 		.fontWeight(.medium)
-		.shadow(color: Color.imageBackground, radius: 10)
+		.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 	}
 }
 
 struct CustomImageItemButtonView_Previews: PreviewProvider {
 	static var previews: some View {
-		CustomImageItemButtonView(action: {}, icon: Icons.Button.download.rawValue, label: "Save", tintColor: Color.buttonColor, foregroundColor: .white)
+		CustomImageItemButtonView(action: {}, icon: Icons.Button.download.rawValue, label: "Save", tintColor: Colors.buttonColor.swiftUIColor, foregroundColor: .white)
 	}
 }

@@ -27,7 +27,7 @@ struct HomePageView: View {
 							Text("\(size.width) x \(size.height)")
 						}
 					}
-					.pickerStyle(.navigationLink)
+					.pickerStyle(.menu)
 					.padding(8)
 				}
 				.modifier(CustomListItemModifier())
@@ -36,14 +36,12 @@ struct HomePageView: View {
 					Text(LocalizationStrings.selectEngine)
 						.padding(8)
 					Spacer()
-					Picker("",
-					       selection: $viewModel.selectedEngineId)
-					{
+					Picker("", selection: $viewModel.selectedEngineId) {
 						ForEach(viewModel.engines, id: \.id) { engine in
 							Text("\(engine.name)")
 						}
 					}
-					.pickerStyle(.navigationLink)
+					.pickerStyle(.menu)
 					.padding(8)
 				}
 				.modifier(CustomListItemModifier())
@@ -68,8 +66,10 @@ struct HomePageView: View {
 				PrompTextfieldView(prompt: $prompt) {
 					viewModel.clearAll()
 					viewModel.generateImage()
+					prompt = ""
 				}
 			}
+			.foregroundColor(Colors.textColor.swiftUIColor)
 			.disabled(viewModel.isGenerating)
 			.onAppear(perform: {
 				viewModel.fetchEngineList()
@@ -83,8 +83,9 @@ struct HomePageView: View {
 			if viewModel.isGenerating {
 				ProgressView {
 					Text(LocalizationStrings.generateImage)
-						.foregroundColor(Color.labelColor.opacity(0.5))
+						.foregroundColor(Colors.textColor.swiftUIColor)
 				}
+				.tint(Colors.buttonColor.swiftUIColor)
 			} else { EmptyView() }
 		}
 	}
@@ -93,9 +94,10 @@ struct HomePageView: View {
 private struct CustomListItemModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
-			.background(Color.secondarySystemBackground)
+			.background(Colors.secondaryBackgroundColor.swiftUIColor)
 			.cornerRadius(10)
 			.padding([.horizontal], 16)
+			.tint(Colors.textColor.swiftUIColor)
 	}
 }
 

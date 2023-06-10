@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum LocalizationStrings {
+  /// AI Image Generator
+  internal static let appDescription = LocalizationStrings.tr("Localizable", "appDescription", fallback: "AI Image Generator")
   /// Localizable.strings
   ///   diffuVision
   /// 
@@ -18,10 +20,16 @@ internal enum LocalizationStrings {
   /// You haven't generated an image yet.
   /// Enter your prompt and turn your ideas into images.
   internal static let dashboardTitle = LocalizationStrings.tr("Localizable", "dashboardTitle", fallback: "You haven't generated an image yet.\nEnter your prompt and turn your ideas into images.")
+  /// Done
+  internal static let doneButton = LocalizationStrings.tr("Localizable", "doneButton", fallback: "Done")
   /// An unexpected error has occurred
   internal static let error = LocalizationStrings.tr("Localizable", "error", fallback: "An unexpected error has occurred")
   /// Generating image. Please wait.
   internal static let generateImage = LocalizationStrings.tr("Localizable", "generateImage", fallback: "Generating image. Please wait.")
+  /// Get Started
+  internal static let getStarted = LocalizationStrings.tr("Localizable", "getStarted", fallback: "Get Started")
+  /// Transform your creative ideas into stunning images
+  internal static let onboardMessage = LocalizationStrings.tr("Localizable", "onboardMessage", fallback: "Transform your creative ideas into stunning images")
   /// Enter your prompt here
   internal static let prompt = LocalizationStrings.tr("Localizable", "prompt", fallback: "Enter your prompt here")
   /// Regenerate

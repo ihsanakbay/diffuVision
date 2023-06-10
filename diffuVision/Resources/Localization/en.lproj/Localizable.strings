@@ -7,10 +7,14 @@
 */
 
 "appTitle" = "diffuVision";
+"appDescription" = "AI Image Generator";
+"onboardMessage" = "Transform your creative ideas into stunning images";
+"getStarted" = "Get Started";
 "dashboardTitle" = "You haven't generated an image yet.\nEnter your prompt and turn your ideas into images.";
 "tabSettings" = "Settings";
 "save" = "Save";
 "share" = "Share";
+"doneButton" = "Done";
 "regenerate" = "Regenerate";
 "prompt" = "Enter your prompt here";
 

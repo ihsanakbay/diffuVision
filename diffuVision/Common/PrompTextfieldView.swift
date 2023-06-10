@@ -20,16 +20,16 @@ struct PrompTextfieldView: View {
 				TextField(LocalizationStrings.prompt,
 				          text: $prompt.max(300),
 				          axis: .vertical)
-					.foregroundColor(.labelColor)
+					.foregroundColor(Colors.textColor.swiftUIColor)
 					.padding(8)
-					.background(Color.secondarySystemBackground)
+					.background(Colors.secondaryBackgroundColor.swiftUIColor)
 					.cornerRadius(10)
 					.padding(.horizontal)
 					.focused($promptTextFieldFocused)
 					.toolbar {
 						ToolbarItemGroup(placement: .keyboard) {
 							Spacer()
-							Button("Done") {
+							Button(LocalizationStrings.doneButton) {
 								promptTextFieldFocused = false
 							}
 						}
@@ -40,7 +40,9 @@ struct PrompTextfieldView: View {
 				Button(action: action) {
 					Image(systemName: Icons.Button.send.rawValue)
 						.foregroundColor(.white)
+						
 				}
+				.tint(Colors.buttonColor.swiftUIColor)
 				.disabled(prompt.isEmpty)
 				.buttonStyle(.borderedProminent)
 				.clipShape(Circle())
