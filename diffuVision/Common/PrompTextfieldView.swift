@@ -42,7 +42,7 @@ struct PrompTextfieldView: View {
 						.foregroundColor(.white)
 						
 				}
-				.tint(Colors.buttonColor.swiftUIColor)
+				.tint(Colors.buttonAndIconColor.swiftUIColor)
 				.disabled(prompt.isEmpty)
 				.buttonStyle(.borderedProminent)
 				.clipShape(Circle())

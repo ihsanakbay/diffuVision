@@ -16,7 +16,7 @@ struct MainTabView: View {
 	@State private var selectedTab: TabItems = .image
 
 	init() {
-		UITabBar.appearance().unselectedItemTintColor = UIColor(asset: Colors.iconColor)
+		UITabBar.appearance().unselectedItemTintColor = UIColor(asset: Colors.buttonAndIconColor)
 	}
 
 	var body: some View {
@@ -24,10 +24,25 @@ struct MainTabView: View {
 			// MARK: - Homepage
 
 			NavigationView {
-				HomePageView()
-					.navigationTitle(LocalizationStrings.appTitle)
-					.navigationBarTitleDisplayMode(.inline)
-					.background(Colors.backgroundColor.swiftUIColor)
+				ZStack {
+					BackgroundView()
+					HomePageView()
+						.navigationTitle(LocalizationStrings.appTitle)
+						.navigationBarTitleDisplayMode(.inline)
+						.toolbar {
+							ToolbarItem(placement: .navigationBarTrailing) {
+								HStack {
+									Image(systemName: Icons.TabView.imageTab.rawValue)
+									Text("1000")
+										.bold()
+								}
+								.padding(.horizontal, 8)
+								.foregroundColor(Colors.textColor.swiftUIColor)
+								.background(Colors.buttonAndIconColor2.swiftUIColor)
+								.cornerRadius(10)
+							}
+						}
+				}
 			}
 			.tag(TabItems.image)
 			.tabItem {
@@ -37,17 +52,20 @@ struct MainTabView: View {
 			// MARK: - Settings
 
 			NavigationView {
-				SettingsPageView()
-					.navigationTitle(LocalizationStrings.tabSettings)
-					.navigationBarTitleDisplayMode(.inline)
-					.background(Colors.backgroundColor.swiftUIColor)
+				ZStack {
+					BackgroundView()
+					SettingsPageView()
+						.navigationTitle(LocalizationStrings.tabSettings)
+						.navigationBarTitleDisplayMode(.inline)
+				}
 			}
 			.tag(TabItems.settings)
 			.tabItem {
 				Icons.TabView.settingsTab.image
 			}
 		}
-		.tint(Colors.buttonColor.swiftUIColor)
+
+		.tint(Colors.buttonAndIconColor.swiftUIColor)
 	}
 }
 

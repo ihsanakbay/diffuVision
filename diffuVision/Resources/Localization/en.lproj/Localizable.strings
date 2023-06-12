@@ -15,11 +15,16 @@
 "save" = "Save";
 "share" = "Share";
 "doneButton" = "Done";
+"ok" = "OK";
 "regenerate" = "Regenerate";
 "prompt" = "Enter your prompt here";
 
 "error" = "An unexpected error has occurred";
-"unreachableError" = "Check your network connection";
-"selectSize" = "Size";
-"selectEngine" = "Engine";
+"unreachableError" = "Check your network connection and try again";
+"selectSize" = "Select Size";
+"selectEngine" = "Select Engine";
 "generateImage" = "Generating image. Please wait.";
+
+"policy" = "Privacy Policy & Terms of Use";
+"feedback" = "Give us feedback";
+"premium" = "Premium";

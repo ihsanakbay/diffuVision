@@ -24,28 +24,36 @@ internal enum LocalizationStrings {
   internal static let doneButton = LocalizationStrings.tr("Localizable", "doneButton", fallback: "Done")
   /// An unexpected error has occurred
   internal static let error = LocalizationStrings.tr("Localizable", "error", fallback: "An unexpected error has occurred")
+  /// Give us feedback
+  internal static let feedback = LocalizationStrings.tr("Localizable", "feedback", fallback: "Give us feedback")
   /// Generating image. Please wait.
   internal static let generateImage = LocalizationStrings.tr("Localizable", "generateImage", fallback: "Generating image. Please wait.")
   /// Get Started
   internal static let getStarted = LocalizationStrings.tr("Localizable", "getStarted", fallback: "Get Started")
+  /// OK
+  internal static let ok = LocalizationStrings.tr("Localizable", "ok", fallback: "OK")
   /// Transform your creative ideas into stunning images
   internal static let onboardMessage = LocalizationStrings.tr("Localizable", "onboardMessage", fallback: "Transform your creative ideas into stunning images")
+  /// Privacy Policy & Terms of Use
+  internal static let policy = LocalizationStrings.tr("Localizable", "policy", fallback: "Privacy Policy & Terms of Use")
+  /// Premium
+  internal static let premium = LocalizationStrings.tr("Localizable", "premium", fallback: "Premium")
   /// Enter your prompt here
   internal static let prompt = LocalizationStrings.tr("Localizable", "prompt", fallback: "Enter your prompt here")
   /// Regenerate
   internal static let regenerate = LocalizationStrings.tr("Localizable", "regenerate", fallback: "Regenerate")
   /// Save
   internal static let save = LocalizationStrings.tr("Localizable", "save", fallback: "Save")
-  /// Engine
-  internal static let selectEngine = LocalizationStrings.tr("Localizable", "selectEngine", fallback: "Engine")
-  /// Size
-  internal static let selectSize = LocalizationStrings.tr("Localizable", "selectSize", fallback: "Size")
+  /// Select Engine
+  internal static let selectEngine = LocalizationStrings.tr("Localizable", "selectEngine", fallback: "Select Engine")
+  /// Select Size
+  internal static let selectSize = LocalizationStrings.tr("Localizable", "selectSize", fallback: "Select Size")
   /// Share
   internal static let share = LocalizationStrings.tr("Localizable", "share", fallback: "Share")
   /// Settings
   internal static let tabSettings = LocalizationStrings.tr("Localizable", "tabSettings", fallback: "Settings")
-  /// Check your network connection
-  internal static let unreachableError = LocalizationStrings.tr("Localizable", "unreachableError", fallback: "Check your network connection")
+  /// Check your network connection and try again
+  internal static let unreachableError = LocalizationStrings.tr("Localizable", "unreachableError", fallback: "Check your network connection and try again")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

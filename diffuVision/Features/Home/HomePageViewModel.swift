@@ -67,6 +67,16 @@ final class HomePageViewModel: ObservableObject {
 		return true
 	}
 
+	func getSelectedEngineIdName() -> String {
+		guard let engine = engines.first(where: { $0.id == selectedEngineId }) else { return "" }
+		return engine.name
+	}
+
+	func getSelectedSizeText() -> String {
+		let size = selectedSize
+		return "\(size.width) x \(size.height)"
+	}
+
 	func clearAll() {
 		generatedImageItemModel.response = nil
 	}

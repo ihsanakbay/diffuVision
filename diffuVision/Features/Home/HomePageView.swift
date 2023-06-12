@@ -11,38 +11,38 @@ struct HomePageView: View {
 	@State private var prompt: String = ""
 	@StateObject private var viewModel: HomePageViewModel = .init()
 
+	@State private var isSizeSheetPresented = false
+	@State private var isEngineSheetPresented = false
+
 	var body: some View {
 		ZStack {
 			// MARK: - Size, Engine
 
 			VStack {
-				HStack {
+				Button {
+					isSizeSheetPresented = true
+				} label: {
 					Text(LocalizationStrings.selectSize)
+						.font(.subheadline)
 						.padding(8)
 					Spacer()
-					Picker("",
-					       selection: $viewModel.selectedSize)
-					{
-						ForEach(Size.sizes, id: \.self) { size in
-							Text("\(size.width) x \(size.height)")
-						}
-					}
-					.pickerStyle(.menu)
-					.padding(8)
+					Text(viewModel.getSelectedSizeText())
+						.font(.subheadline)
+						.padding(8)
 				}
 				.modifier(CustomListItemModifier())
 
-				HStack {
+				Button {
+					isEngineSheetPresented = true
+				} label: {
 					Text(LocalizationStrings.selectEngine)
+						.font(.subheadline)
 						.padding(8)
 					Spacer()
-					Picker("", selection: $viewModel.selectedEngineId) {
-						ForEach(viewModel.engines, id: \.id) { engine in
-							Text("\(engine.name)")
-						}
-					}
-					.pickerStyle(.menu)
-					.padding(8)
+					Text(viewModel.getSelectedEngineIdName())
+						.font(.subheadline)
+						.lineLimit(1)
+						.padding(8)
 				}
 				.modifier(CustomListItemModifier())
 
@@ -85,8 +85,74 @@ struct HomePageView: View {
 					Text(LocalizationStrings.generateImage)
 						.foregroundColor(Colors.textColor.swiftUIColor)
 				}
-				.tint(Colors.buttonColor.swiftUIColor)
+				.tint(Colors.buttonAndIconColor.swiftUIColor)
 			} else { EmptyView() }
+		}
+		.sheet(isPresented: $isSizeSheetPresented) {
+			NavigationView {
+				List {
+					ForEach(Size.sizes, id: \.self) { size in
+						HStack {
+							Text("\(size.width) x \(size.height)")
+							if size == viewModel.selectedSize {
+								Spacer()
+								Image(systemName: Icons.Button.checkmark.rawValue)
+							}
+						}
+						.onTapGesture {
+							viewModel.selectedSize = size
+							isSizeSheetPresented = false
+						}
+					}
+				}
+				.navigationTitle(LocalizationStrings.selectSize)
+				.navigationBarTitleDisplayMode(.inline)
+				.toolbar {
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Button {
+							isSizeSheetPresented.toggle()
+						} label: {
+							Text(LocalizationStrings.doneButton)
+						}
+					}
+				}
+				.scrollContentBackground(.hidden)
+				.background(Colors.secondaryBackgroundColor.swiftUIColor)
+			}
+			.presentationDetents([.medium])
+		}
+		.sheet(isPresented: $isEngineSheetPresented) {
+			NavigationView {
+				List {
+					ForEach(viewModel.engines, id: \.id) { engine in
+						HStack {
+							Text("\(engine.name)")
+
+							if engine.id == viewModel.selectedEngineId {
+								Spacer()
+								Image(systemName: Icons.Button.checkmark.rawValue)
+							}
+						}
+						.onTapGesture {
+							viewModel.selectedEngineId = engine.id
+							isEngineSheetPresented = false
+						}
+					}
+				}
+				.navigationTitle(LocalizationStrings.selectEngine)
+				.navigationBarTitleDisplayMode(.inline)
+				.toolbar {
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Button {
+							isEngineSheetPresented.toggle()
+						} label: {
+							Text(LocalizationStrings.doneButton)
+						}
+					}
+				}
+				.scrollContentBackground(.hidden)
+				.background(Colors.secondaryBackgroundColor.swiftUIColor)
+			}
 		}
 	}
 }
@@ -94,7 +160,7 @@ struct HomePageView: View {
 private struct CustomListItemModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
-			.background(Colors.secondaryBackgroundColor.swiftUIColor)
+			.background(Colors.buttonAndIconColor.swiftUIColor)
 			.cornerRadius(10)
 			.padding([.horizontal], 16)
 			.tint(Colors.textColor.swiftUIColor)

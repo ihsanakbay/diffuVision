@@ -15,11 +15,16 @@
 "save" = "Kaydet";
 "share" = "Paylaş";
 "doneButton" = "Tamam";
+"ok" = "TAMAM";
 "regenerate" = "Yenile";
 "prompt" = "Buraya metninizi girin";
 
 "error" = "Beklenmedik bir hata oluştu";
-"unreachableError" = "İnternet bağlantınızı kontrol ediniz";
-"selectSize" = "Boyut";
-"selectEngine" = "Model";
+"unreachableError" = "İnternet bağlantınızı kontrol edin ve tekrar deneyin";
+"selectSize" = "Boyut Seç";
+"selectEngine" = "Model Seç";
 "generateImage" = "Görüntü oluşturuluyor. Lütfen Bekleyiniz.";
+
+"policy" = "Gizlilik Politikası & Kullanım Koşulları";
+"feedback" = "Bize geri bildirim yapın";
+"premium" = "Premium";

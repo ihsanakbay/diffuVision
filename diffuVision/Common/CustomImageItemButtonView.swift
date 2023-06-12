@@ -34,6 +34,6 @@ struct CustomImageItemButtonView: View {
 
 struct CustomImageItemButtonView_Previews: PreviewProvider {
 	static var previews: some View {
-		CustomImageItemButtonView(action: {}, icon: Icons.Button.download.rawValue, label: "Save", tintColor: Colors.buttonColor.swiftUIColor, foregroundColor: .white)
+		CustomImageItemButtonView(action: {}, icon: Icons.Button.download.rawValue, label: "Save", tintColor: Colors.buttonAndIconColor.swiftUIColor, foregroundColor: .white)
 	}
 }

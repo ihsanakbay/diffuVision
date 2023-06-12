@@ -5,12 +5,12 @@
 //  Created by İhsan Akbay on 10.06.2023.
 //
 
+import AuthenticationServices
 import RiveRuntime
 import SwiftUI
 
 struct OnboardingView: View {
-	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool?
-
+	@StateObject private var vm: OnboardingViewModel = .init()
 	private var background = RiveViewModel(fileName: "BackgroundAnimation")
 
 	var body: some View {
@@ -38,22 +38,36 @@ struct OnboardingView: View {
 					.multilineTextAlignment(.center)
 					.foregroundColor(Colors.textColor.swiftUIColor)
 
-				Button {
-					isOnboarding = false
-				} label: {
-					Text(LocalizationStrings.getStarted)
-						.frame(width: Constants.screenWidth * 0.6)
-						.padding(8)
-				}
-				.buttonStyle(.borderedProminent)
-				.clipShape(Capsule())
-				.tint(Colors.buttonColor.swiftUIColor)
-				.foregroundColor(.white)
-				.fontWeight(.medium)
-				.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
+				SignInWithAppleButton(.signIn,
+									  onRequest: vm.configure,
+									  onCompletion: vm.handleSignInWithApple)
+					.signInWithAppleButtonStyle(.white)
+					.frame(height: 40)
+					.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
+					.padding()
+
+//				Button {
+//					vm.test()
+//				} label: {
+//					Text(LocalizationStrings.getStarted)
+//						.frame(width: Constants.screenWidth * 0.6)
+//						.padding(8)
+//				}
+//				.buttonStyle(.borderedProminent)
+//				.clipShape(Capsule())
+//				.tint(Colors.buttonAndIconColor.swiftUIColor)
+//				.foregroundColor(.white)
+//				.fontWeight(.medium)
+//				.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
+		
 			}
 			.padding(30)
 		}
+		.errorAlert(error: $vm.errorMessage)
+	}
+	
+	private func auth() throws {
+		throw NetworkRequestError.badRequest
 	}
 }
 
