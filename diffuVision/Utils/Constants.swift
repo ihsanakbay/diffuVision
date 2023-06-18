@@ -14,8 +14,9 @@ struct Constants {
 	static let privacyPolicyLink = "https://docs.google.com/document/d/1FzMSoGiZt1UsHCWr8qn-VZR1OXRVfHx-AWA7abwSKys/edit?usp=sharing"
 }
 
-enum AppStorageKeys: String {
-	case isOnboarding
+enum StorageKeys: String {
+	case sharedGroup
+	case isAuthenticated
 	case appleUser
 }
 

@@ -38,34 +38,24 @@ struct OnboardingView: View {
 					.multilineTextAlignment(.center)
 					.foregroundColor(Colors.textColor.swiftUIColor)
 
-				SignInWithAppleButton(.signIn,
-									  onRequest: vm.configure,
-									  onCompletion: vm.handleSignInWithApple)
-					.signInWithAppleButtonStyle(.white)
-					.frame(height: 40)
-					.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
-					.padding()
-
-//				Button {
-//					vm.test()
-//				} label: {
-//					Text(LocalizationStrings.getStarted)
-//						.frame(width: Constants.screenWidth * 0.6)
-//						.padding(8)
-//				}
-//				.buttonStyle(.borderedProminent)
-//				.clipShape(Capsule())
-//				.tint(Colors.buttonAndIconColor.swiftUIColor)
-//				.foregroundColor(.white)
-//				.fontWeight(.medium)
-//				.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
-		
+				Button {
+					Task {
+						try await vm.signInWithApple()
+					}
+				} label: {
+					SignInWithAppleButtonViewRepresentable(type: .default, style: .white)
+						.allowsHitTesting(false)
+				}
+				.frame(height: 55)
+				.clipShape(Capsule())
+				.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
+				.padding()
 			}
 			.padding(30)
 		}
 		.errorAlert(error: $vm.errorMessage)
 	}
-	
+
 	private func auth() throws {
 		throw NetworkRequestError.badRequest
 	}

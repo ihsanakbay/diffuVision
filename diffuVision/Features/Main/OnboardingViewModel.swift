@@ -5,37 +5,26 @@
 //  Created by İhsan Akbay on 12.06.2023.
 //
 
-import AuthenticationServices
+import FirebaseAuth
+import FirebaseFirestore
 import SwiftUI
 
+@MainActor
 final class OnboardingViewModel: ObservableObject {
-	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool?
-
 	@Published var errorMessage: Swift.Error?
+	@AppStorage(StorageKeys.isAuthenticated.rawValue) var isAuthenticated: Bool?
 
-	func configure(_ request: ASAuthorizationAppleIDRequest) {
-		request.requestedScopes = [.email, .fullName]
-	}
-
-	func handleSignInWithApple(_ authResult: Result<ASAuthorization, Error>) {
-		switch authResult {
-		case .success(let auth):
-			print(auth)
-			switch auth.credential {
-			case let appleIdCredentials as ASAuthorizationAppleIDCredential:
-				if let appleUser = AppleUser(credentials: appleIdCredentials),
-				   let appleUserData = try? JSONEncoder().encode(appleUser)
-				{
-					UserDefaults.standard.setValue(appleUserData, forKey: appleUser.userId)
-					print("saved apple user", appleUser)
-				}
-
-			default:
-				print(auth.credential)
-			}
-		case .failure(let error):
-			print(error)
-			self.errorMessage = error
+	func signInWithApple() async throws {
+		do {
+			let helper = SignInWithAppleHelper()
+			let tokens = try await helper.startSignInWithAppleFlow()
+			let authDataResult = try await AuthenticationManager.shared.signInWithApple(credentials: tokens)
+			let user = DBUser(auth: authDataResult)
+			try await UserManager.shared.createNewUser(user: user)
+			isAuthenticated = true
+		} catch {
+			errorMessage = NetworkRequestError.customError(error.localizedDescription)
+			isAuthenticated = false
 		}
 	}
 }

@@ -17,9 +17,16 @@ internal enum LocalizationStrings {
   /// 
   ///   Created by İhsan Akbay on 23.05.2023.
   internal static let appTitle = LocalizationStrings.tr("Localizable", "appTitle", fallback: "diffuVision")
+  /// Cancel
+  internal static let cancel = LocalizationStrings.tr("Localizable", "cancel", fallback: "Cancel")
   /// You haven't generated an image yet.
   /// Enter your prompt and turn your ideas into images.
   internal static let dashboardTitle = LocalizationStrings.tr("Localizable", "dashboardTitle", fallback: "You haven't generated an image yet.\nEnter your prompt and turn your ideas into images.")
+  /// Delete your account
+  internal static let deleteAccount = LocalizationStrings.tr("Localizable", "deleteAccount", fallback: "Delete your account")
+  /// Your account will be permanently deleted.
+  /// Do you confirm?
+  internal static let deleteAccountConfirmationMessage = LocalizationStrings.tr("Localizable", "deleteAccountConfirmationMessage", fallback: "Your account will be permanently deleted.\nDo you confirm?")
   /// Done
   internal static let doneButton = LocalizationStrings.tr("Localizable", "doneButton", fallback: "Done")
   /// An unexpected error has occurred
@@ -30,6 +37,8 @@ internal enum LocalizationStrings {
   internal static let generateImage = LocalizationStrings.tr("Localizable", "generateImage", fallback: "Generating image. Please wait.")
   /// Get Started
   internal static let getStarted = LocalizationStrings.tr("Localizable", "getStarted", fallback: "Get Started")
+  /// Logout
+  internal static let logout = LocalizationStrings.tr("Localizable", "logout", fallback: "Logout")
   /// OK
   internal static let ok = LocalizationStrings.tr("Localizable", "ok", fallback: "OK")
   /// Transform your creative ideas into stunning images
@@ -54,6 +63,10 @@ internal enum LocalizationStrings {
   internal static let tabSettings = LocalizationStrings.tr("Localizable", "tabSettings", fallback: "Settings")
   /// Check your network connection and try again
   internal static let unreachableError = LocalizationStrings.tr("Localizable", "unreachableError", fallback: "Check your network connection and try again")
+  /// User
+  internal static let user = LocalizationStrings.tr("Localizable", "user", fallback: "User")
+  /// Yes
+  internal static let yes = LocalizationStrings.tr("Localizable", "yes", fallback: "Yes")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

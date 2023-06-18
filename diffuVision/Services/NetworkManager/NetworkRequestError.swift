@@ -20,4 +20,5 @@ enum NetworkRequestError: LocalizedError, Equatable {
 	case urlSessionFailed(_ error: URLError)
 	case timeOut
 	case unknownError
+	case customError(_ message: String)
 }

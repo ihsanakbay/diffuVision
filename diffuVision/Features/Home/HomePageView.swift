@@ -99,6 +99,7 @@ struct HomePageView: View {
 								Image(systemName: Icons.Button.checkmark.rawValue)
 							}
 						}
+						.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 						.onTapGesture {
 							viewModel.selectedSize = size
 							isSizeSheetPresented = false
@@ -117,7 +118,7 @@ struct HomePageView: View {
 					}
 				}
 				.scrollContentBackground(.hidden)
-				.background(Colors.secondaryBackgroundColor.swiftUIColor)
+				.background(Colors.backgroundColor.swiftUIColor)
 			}
 			.presentationDetents([.medium])
 		}
@@ -133,6 +134,7 @@ struct HomePageView: View {
 								Image(systemName: Icons.Button.checkmark.rawValue)
 							}
 						}
+						.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 						.onTapGesture {
 							viewModel.selectedEngineId = engine.id
 							isEngineSheetPresented = false
@@ -151,7 +153,7 @@ struct HomePageView: View {
 					}
 				}
 				.scrollContentBackground(.hidden)
-				.background(Colors.secondaryBackgroundColor.swiftUIColor)
+				.background(Colors.backgroundColor.swiftUIColor)
 			}
 		}
 	}
@@ -160,7 +162,8 @@ struct HomePageView: View {
 private struct CustomListItemModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
-			.background(Colors.buttonAndIconColor.swiftUIColor)
+			.frame(height: 42)
+			.background(Colors.secondaryBackgroundColor.swiftUIColor)
 			.cornerRadius(10)
 			.padding([.horizontal], 16)
 			.tint(Colors.textColor.swiftUIColor)

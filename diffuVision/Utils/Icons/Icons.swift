@@ -35,6 +35,9 @@ struct Icons {
 
 	enum General: String {
 		case xMark = "xmark.octagon"
+		case logout = "power.circle.fill"
+		case delete = "trash.fill"
+		case user = "person.fill"
 
 		var image: Image {
 			return Image(systemName: self.rawValue)

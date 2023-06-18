@@ -16,6 +16,8 @@
 "share" = "Paylaş";
 "doneButton" = "Tamam";
 "ok" = "TAMAM";
+"yes" = "Evet";
+"cancel" = "İptal";
 "regenerate" = "Yenile";
 "prompt" = "Buraya metninizi girin";
 
@@ -28,3 +30,8 @@
 "policy" = "Gizlilik Politikası & Kullanım Koşulları";
 "feedback" = "Bize geri bildirim yapın";
 "premium" = "Premium";
+
+"logout" = "Çıkış yap";
+"deleteAccount" = "Hesabı sil";
+"deleteAccountConfirmationMessage" = "Hesabınız kalıcı olarak silinecektir. \nOnaylıyor musunuz?";
+"user" = "Kullanıcı";

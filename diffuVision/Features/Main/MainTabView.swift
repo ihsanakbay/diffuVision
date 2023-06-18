@@ -56,7 +56,7 @@ struct MainTabView: View {
 					BackgroundView()
 					SettingsPageView()
 						.navigationTitle(LocalizationStrings.tabSettings)
-						.navigationBarTitleDisplayMode(.inline)
+						.navigationBarTitleDisplayMode(.automatic)
 				}
 			}
 			.tag(TabItems.settings)

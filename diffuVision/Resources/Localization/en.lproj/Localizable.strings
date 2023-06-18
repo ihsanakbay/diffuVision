@@ -16,6 +16,8 @@
 "share" = "Share";
 "doneButton" = "Done";
 "ok" = "OK";
+"yes" = "Yes";
+"cancel" = "Cancel";
 "regenerate" = "Regenerate";
 "prompt" = "Enter your prompt here";
 
@@ -28,3 +30,7 @@
 "policy" = "Privacy Policy & Terms of Use";
 "feedback" = "Give us feedback";
 "premium" = "Premium";
+"logout" = "Logout";
+"deleteAccount" = "Delete your account";
+"deleteAccountConfirmationMessage" = "Your account will be permanently deleted.\nDo you confirm?";
+"user" = "User";

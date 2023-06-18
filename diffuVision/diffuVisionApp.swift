@@ -5,21 +5,37 @@
 //  Created by İhsan Akbay on 23.05.2023.
 //
 
+import FirebaseCore
 import SwiftUI
 
 @main
 struct diffuVisionApp: App {
-	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool = true
+	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+	@AppStorage(StorageKeys.isAuthenticated.rawValue) var isAuthenticated: Bool = false
+
+	private func checkUserState() {
+		if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser(),
+		   !authUser.uid.isEmpty
+		{
+			self.isAuthenticated = true
+			return
+		}
+		self.isAuthenticated = false
+	}
 
 	var body: some Scene {
 		WindowGroup {
-			if isOnboarding {
-				OnboardingView()
-					.preferredColorScheme(.dark)
+			Group {
+				if self.isAuthenticated {
+					MainTabView()
+						.preferredColorScheme(.dark)
+				} else {
+					OnboardingView()
+						.preferredColorScheme(.dark)
+				}
 			}
-			else {
-				MainTabView()
-					.preferredColorScheme(.dark)
+			.onAppear {
+				self.checkUserState()
 			}
 		}
 	}
