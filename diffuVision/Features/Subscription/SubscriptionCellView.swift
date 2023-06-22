@@ -112,12 +112,25 @@ struct SubscriptionCellView: View {
 			if try await store.purchase(product) != nil {
 				withAnimation {
 					isPurchased = true
+					Task {
+						await updatePremium(isPremium: isPurchased)
+					}
 				}
 			}
 		} catch StoreError.failedVerification {
 			errorMessage = NetworkRequestError.customError("Your purchase could not be verified by the App Store.")
 		} catch {
 			print("Failed purchase for \(product.id): \(error)")
+		}
+	}
+
+	private func updatePremium(isPremium: Bool) async {
+		if let user = try? AuthenticationManager.shared.getAuthenticatedUser() {
+			do {
+				try await UserManager.shared.updateUserPremiumStatus(userId: user.uid, isPremium: isPremium)
+			} catch {
+				errorMessage = NetworkRequestError.serverError
+			}
 		}
 	}
 }

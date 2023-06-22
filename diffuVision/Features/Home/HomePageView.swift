@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct HomePageView: View {
+	@EnvironmentObject var store: Store
+	@Environment(\.requestReview) var requestReview
+
 	@State private var prompt: String = ""
 	@StateObject private var viewModel: HomePageViewModel = .init()
 
 	@State private var isSizeSheetPresented = false
 	@State private var isEngineSheetPresented = false
+	@State private var showSubscriptionSheet = false
+	@State private var isPremium = false
 
 	var body: some View {
 		ZStack {
@@ -64,9 +69,13 @@ struct HomePageView: View {
 				// MARK: - Promt texr field and generate button
 
 				PrompTextfieldView(prompt: $prompt) {
-					viewModel.clearAll()
-					viewModel.generateImage()
-					prompt = ""
+					if isPremium {
+						viewModel.clearAll()
+						viewModel.generateImage()
+						prompt = ""
+					} else {
+						showSubscriptionSheet.toggle()
+					}
 				}
 			}
 			.foregroundColor(Colors.textColor.swiftUIColor)
@@ -156,6 +165,37 @@ struct HomePageView: View {
 				.background(Colors.backgroundColor.swiftUIColor)
 			}
 		}
+		.fullScreenCover(isPresented: $showSubscriptionSheet) {
+			NavigationView {
+				SubscriptionListView()
+					.navigationBarTitleDisplayMode(.inline)
+					.navigationTitle(LocalizationStrings.subscriptions)
+					.toolbar {
+						ToolbarItem(placement: .navigationBarTrailing) {
+							Button {
+								showSubscriptionSheet.toggle()
+							} label: {
+								Text(LocalizationStrings.doneButton)
+							}
+						}
+					}
+			}
+			.presentationDetents([.medium, .large])
+		}
+		.onAppear {
+			Task {
+				await store.updateCustomerProductStatus()
+				isPremium = store.purchasedSubscriptions.isEmpty ? false : true
+				await viewModel.updatePremium(isPremium: isPremium)
+			}
+			viewModel.countIncrement()
+			print("COUNT: \(viewModel.appStartCount)")
+			if viewModel.appStartCount > 4 {
+				DispatchQueue.main.async {
+					requestReview()
+				}
+			}
+		}
 	}
 }
 
@@ -173,5 +213,6 @@ private struct CustomListItemModifier: ViewModifier {
 struct HomePageView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomePageView()
+			.environmentObject(Store())
 	}
 }

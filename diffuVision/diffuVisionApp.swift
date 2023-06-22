@@ -5,6 +5,7 @@
 //  Created by İhsan Akbay on 23.05.2023.
 //
 
+import FirebaseAuth
 import FirebaseCore
 import SwiftUI
 

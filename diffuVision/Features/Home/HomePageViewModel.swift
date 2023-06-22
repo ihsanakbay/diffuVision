@@ -6,10 +6,11 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
 @MainActor
 final class HomePageViewModel: ObservableObject {
+	@AppStorage(StorageKeys.appStartCount.rawValue) var appStartCount = 0
 	@Published var request: APIParameters.TextToImageRequest = .init()
 	@Published var generatedImageItemModel: GeneratedImageItemModel = .init()
 	@Published var isGenerating: Bool = false
@@ -79,5 +80,21 @@ final class HomePageViewModel: ObservableObject {
 
 	func clearAll() {
 		generatedImageItemModel.response = nil
+	}
+
+	func updatePremium(isPremium: Bool) async {
+		if let user = try? AuthenticationManager.shared.getAuthenticatedUser() {
+			do {
+				try await UserManager.shared.updateUserPremiumStatus(userId: user.uid, isPremium: isPremium)
+			} catch {
+				errorMessage = error.localizedDescription
+			}
+		}
+	}
+	
+	func countIncrement() {
+		var count = appStartCount
+		count += 1
+		appStartCount = count
 	}
 }

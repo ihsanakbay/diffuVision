@@ -27,18 +27,13 @@ final class UserManager {
 		try await userDocument(userId: userId).getDocument(as: DBUser.self)
 	}
 	
+	func deleteUser(userId: String) async throws {
+		try await userDocument(userId: userId).delete()
+	}
+	
 	func updateUserPremiumStatus(userId: String, isPremium: Bool) async throws {
 		let data: [String: Any] = [
 			DBUser.CodingKeys.isPremium.rawValue: isPremium
-		]
-		try await userDocument(userId: userId).updateData(data)
-	}
-	
-	func updateUserCoins(userId: String, coins: Int) async throws {
-		let user = try await getUser(userId: userId)
-		let currentCoins = user.coins ?? 0
-		let data: [String: Any] = [
-			DBUser.CodingKeys.coins.rawValue: currentCoins + coins
 		]
 		try await userDocument(userId: userId).updateData(data)
 	}

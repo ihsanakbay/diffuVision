@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsPageView: View {
+	@Environment(\.requestReview) var requestReview
 	@StateObject private var vm = SettingsViewModel()
 	@State private var isPrivacyPolicyShow: Bool = false
 	@State private var showDeleteAccountAlert: Bool = false
@@ -25,7 +26,12 @@ struct SettingsPageView: View {
 			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 
 			Section {
-				Button {} label: {
+				Button {
+					DispatchQueue.main.async {
+						requestReview()
+					}
+
+				} label: {
 					HStack {
 						Image(systemName: Icons.Button.feedback.rawValue)
 							.tint(Colors.buttonAndIconColor.swiftUIColor)
@@ -70,16 +76,16 @@ struct SettingsPageView: View {
 					}
 				}
 
-				Button {
-					self.showDeleteAccountAlert.toggle()
-				} label: {
-					HStack {
-						Image(systemName: Icons.General.delete.rawValue)
-							.tint(Colors.buttonAndIconColor.swiftUIColor)
-						Text(LocalizationStrings.deleteAccount)
-							.foregroundColor(Colors.buttonAndIconColor.swiftUIColor)
-					}
-				}
+//				Button {
+//					self.showDeleteAccountAlert.toggle()
+//				} label: {
+//					HStack {
+//						Image(systemName: Icons.General.delete.rawValue)
+//							.tint(Colors.buttonAndIconColor.swiftUIColor)
+//						Text(LocalizationStrings.deleteAccount)
+//							.foregroundColor(Colors.buttonAndIconColor.swiftUIColor)
+//					}
+//				}
 			}
 			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 		}
@@ -115,7 +121,6 @@ struct SettingsPageView: View {
 					}
 			}
 		}
-
 		.fullScreenCover(isPresented: $showSubscriptionSheet) {
 			NavigationView {
 				SubscriptionListView()

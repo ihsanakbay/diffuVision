@@ -40,7 +40,6 @@ struct PrompTextfieldView: View {
 				Button(action: action) {
 					Image(systemName: Icons.Button.send.rawValue)
 						.foregroundColor(.white)
-						
 				}
 				.tint(Colors.buttonAndIconColor.swiftUIColor)
 				.disabled(prompt.isEmpty)

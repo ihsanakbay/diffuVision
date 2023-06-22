@@ -70,6 +70,8 @@ extension SubscriptionView {
 		try? await AppStore.sync()
 	}
 
+	
+
 	@MainActor
 	func updateSubscriptionStatus() async {
 		do {

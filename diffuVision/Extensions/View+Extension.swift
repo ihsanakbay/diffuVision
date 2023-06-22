@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension View {
+	@MainActor
 	func errorAlert(error: Binding<Error?>, buttonTitle: String = "OK") -> some View {
 		let localizedAlertError = LocalizedAlertError(error: error.wrappedValue)
 		return alert(isPresented: .constant(localizedAlertError != nil), error: localizedAlertError) { _ in
@@ -25,6 +26,7 @@ struct LocalizedAlertError: LocalizedError {
 	var errorDescription: String? {
 		underlyingError.errorDescription
 	}
+
 	var recoverySuggestion: String? {
 		underlyingError.recoverySuggestion
 	}

@@ -15,10 +15,6 @@ enum TabItems {
 struct MainTabView: View {
 	@State private var selectedTab: TabItems = .image
 
-	init() {
-		UITabBar.appearance().unselectedItemTintColor = UIColor(asset: Colors.buttonAndIconColor)
-	}
-
 	var body: some View {
 		TabView(selection: $selectedTab) {
 			// MARK: - Homepage
@@ -51,7 +47,6 @@ struct MainTabView: View {
 				Icons.TabView.settingsTab.image
 			}
 		}
-
 		.tint(Colors.buttonAndIconColor.swiftUIColor)
 	}
 }
@@ -59,5 +54,6 @@ struct MainTabView: View {
 struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainTabView()
+			.environmentObject(Store())
 	}
 }

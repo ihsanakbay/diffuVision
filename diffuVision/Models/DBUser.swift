@@ -13,7 +13,6 @@ struct DBUser: Codable {
 	let name: String?
 	let createdDate: Date?
 	let isPremium: Bool?
-	let coins: Int?
 
 	init(auth: AuthDataResultModel) {
 		self.uid = auth.uid
@@ -21,7 +20,6 @@ struct DBUser: Codable {
 		self.name = auth.name
 		self.createdDate = Date()
 		self.isPremium = false
-		self.coins = 1
 	}
 
 	enum CodingKeys: String, CodingKey {
@@ -30,7 +28,6 @@ struct DBUser: Codable {
 		case name
 		case createdDate = "created_date"
 		case isPremium = "is_premium"
-		case coins
 	}
 
 	func encode(to encoder: Encoder) throws {
@@ -40,7 +37,6 @@ struct DBUser: Codable {
 		try container.encodeIfPresent(self.name, forKey: .name)
 		try container.encodeIfPresent(self.createdDate, forKey: .createdDate)
 		try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
-		try container.encodeIfPresent(self.coins, forKey: .coins)
 	}
 
 	init(from decoder: Decoder) throws {
@@ -50,6 +46,5 @@ struct DBUser: Codable {
 		self.name = try container.decodeIfPresent(String.self, forKey: .name)
 		self.createdDate = try container.decodeIfPresent(Date.self, forKey: .createdDate)
 		self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
-		self.coins = try container.decodeIfPresent(Int.self, forKey: .coins)
 	}
 }

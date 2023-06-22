@@ -23,7 +23,9 @@ final class SettingsViewModel: ObservableObject {
 
 	func deleteAccount() async {
 		do {
+			let user = try AuthenticationManager.shared.getAuthenticatedUser()
 			try await AuthenticationManager.shared.delete()
+			try await UserManager.shared.deleteUser(userId: user.uid)
 			isAuthenticated = false
 		} catch {
 			errorMessage = NetworkRequestError.customError(error.localizedDescription)
@@ -37,3 +39,4 @@ final class SettingsViewModel: ObservableObject {
 		return "N/A"
 	}
 }
+

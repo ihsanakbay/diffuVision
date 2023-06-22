@@ -18,6 +18,7 @@ enum StorageKeys: String {
 	case sharedGroup
 	case isAuthenticated
 	case appleUser
+	case appStartCount
 }
 
 enum DefaultValues {
