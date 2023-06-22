@@ -11,6 +11,7 @@ struct SettingsPageView: View {
 	@StateObject private var vm = SettingsViewModel()
 	@State private var isPrivacyPolicyShow: Bool = false
 	@State private var showDeleteAccountAlert: Bool = false
+	@State private var showSubscriptionSheet: Bool = false
 
 	var body: some View {
 		List {
@@ -45,7 +46,9 @@ struct SettingsPageView: View {
 			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 
 			Section {
-				Button {} label: {
+				Button {
+					showSubscriptionSheet.toggle()
+				} label: {
 					HStack {
 						Image(systemName: Icons.Button.premium.rawValue)
 							.tint(Colors.buttonAndIconColor.swiftUIColor)
@@ -111,6 +114,24 @@ struct SettingsPageView: View {
 						}
 					}
 			}
+		}
+
+		.fullScreenCover(isPresented: $showSubscriptionSheet) {
+			NavigationView {
+				SubscriptionListView()
+					.navigationBarTitleDisplayMode(.inline)
+					.navigationTitle(LocalizationStrings.subscriptions)
+					.toolbar {
+						ToolbarItem(placement: .navigationBarTrailing) {
+							Button {
+								showSubscriptionSheet.toggle()
+							} label: {
+								Text(LocalizationStrings.doneButton)
+							}
+						}
+					}
+			}
+			.presentationDetents([.medium, .large])
 		}
 	}
 }

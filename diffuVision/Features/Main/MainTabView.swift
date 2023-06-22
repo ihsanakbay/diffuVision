@@ -29,19 +29,6 @@ struct MainTabView: View {
 					HomePageView()
 						.navigationTitle(LocalizationStrings.appTitle)
 						.navigationBarTitleDisplayMode(.inline)
-						.toolbar {
-							ToolbarItem(placement: .navigationBarTrailing) {
-								HStack {
-									Image(systemName: Icons.TabView.imageTab.rawValue)
-									Text("1000")
-										.bold()
-								}
-								.padding(.horizontal, 8)
-								.foregroundColor(Colors.textColor.swiftUIColor)
-								.background(Colors.buttonAndIconColor2.swiftUIColor)
-								.cornerRadius(10)
-							}
-						}
 				}
 			}
 			.tag(TabItems.image)

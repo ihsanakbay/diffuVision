@@ -21,6 +21,7 @@ struct DBUser: Codable {
 		self.name = auth.name
 		self.createdDate = Date()
 		self.isPremium = false
+		self.coins = 1
 	}
 
 	enum CodingKeys: String, CodingKey {

@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct diffuVisionApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+	@StateObject var store: Store = .init()
 	@AppStorage(StorageKeys.isAuthenticated.rawValue) var isAuthenticated: Bool = false
 
 	private func checkUserState() {
@@ -29,9 +30,11 @@ struct diffuVisionApp: App {
 				if self.isAuthenticated {
 					MainTabView()
 						.preferredColorScheme(.dark)
+						.environmentObject(self.store)
 				} else {
 					OnboardingView()
 						.preferredColorScheme(.dark)
+						.environmentObject(self.store)
 				}
 			}
 			.onAppear {

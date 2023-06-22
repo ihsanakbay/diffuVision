@@ -18,6 +18,7 @@
 "ok" = "TAMAM";
 "yes" = "Evet";
 "cancel" = "İptal";
+"none" = "Yok";
 "regenerate" = "Yenile";
 "prompt" = "Buraya metninizi girin";
 
@@ -35,3 +36,9 @@
 "deleteAccount" = "Hesabı sil";
 "deleteAccountConfirmationMessage" = "Hesabınız kalıcı olarak silinecektir. \nOnaylıyor musunuz?";
 "user" = "Kullanıcı";
+
+"continue" = "Devam et";
+"restore" = "Satın almayı geri yükle";
+"subscriptions" = "Abonelik Satın Al";
+"mySubscription" = "Aboneliklerim";
+"subscriptionToC" = "Ödeme, satın alma onayının ardından AppStore hesabınızdan tahsil edilecektir. Abonelik, kullanıcının hesap ayarlarında kullanıcı tarafından kapatılmadığı sürece, cari dönemin bitiminden 24 saat önce otomatik olarak yenilenecek ve ücretlendirilecektir. Denemenin kullanılmayan kısmı kaybedilecektir.";

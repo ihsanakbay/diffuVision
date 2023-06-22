@@ -19,6 +19,8 @@ internal enum LocalizationStrings {
   internal static let appTitle = LocalizationStrings.tr("Localizable", "appTitle", fallback: "diffuVision")
   /// Cancel
   internal static let cancel = LocalizationStrings.tr("Localizable", "cancel", fallback: "Cancel")
+  /// Continue
+  internal static let `continue` = LocalizationStrings.tr("Localizable", "continue", fallback: "Continue")
   /// You haven't generated an image yet.
   /// Enter your prompt and turn your ideas into images.
   internal static let dashboardTitle = LocalizationStrings.tr("Localizable", "dashboardTitle", fallback: "You haven't generated an image yet.\nEnter your prompt and turn your ideas into images.")
@@ -39,6 +41,10 @@ internal enum LocalizationStrings {
   internal static let getStarted = LocalizationStrings.tr("Localizable", "getStarted", fallback: "Get Started")
   /// Logout
   internal static let logout = LocalizationStrings.tr("Localizable", "logout", fallback: "Logout")
+  /// My Subscription
+  internal static let mySubscription = LocalizationStrings.tr("Localizable", "mySubscription", fallback: "My Subscription")
+  /// None
+  internal static let `none` = LocalizationStrings.tr("Localizable", "none", fallback: "None")
   /// OK
   internal static let ok = LocalizationStrings.tr("Localizable", "ok", fallback: "OK")
   /// Transform your creative ideas into stunning images
@@ -51,6 +57,8 @@ internal enum LocalizationStrings {
   internal static let prompt = LocalizationStrings.tr("Localizable", "prompt", fallback: "Enter your prompt here")
   /// Regenerate
   internal static let regenerate = LocalizationStrings.tr("Localizable", "regenerate", fallback: "Regenerate")
+  /// Restore purchase
+  internal static let restore = LocalizationStrings.tr("Localizable", "restore", fallback: "Restore purchase")
   /// Save
   internal static let save = LocalizationStrings.tr("Localizable", "save", fallback: "Save")
   /// Select Engine
@@ -59,6 +67,10 @@ internal enum LocalizationStrings {
   internal static let selectSize = LocalizationStrings.tr("Localizable", "selectSize", fallback: "Select Size")
   /// Share
   internal static let share = LocalizationStrings.tr("Localizable", "share", fallback: "Share")
+  /// Buy Subscription
+  internal static let subscriptions = LocalizationStrings.tr("Localizable", "subscriptions", fallback: "Buy Subscription")
+  /// Payment will be charged to your AppStore account upon confirmation of purchase. The subscription will automatically renew and be charged 24 hours before the end of the current period unless turned off by the user in the user's account settings. Any unused portion of the trial will be forfeited.
+  internal static let subscriptionToC = LocalizationStrings.tr("Localizable", "subscriptionToC", fallback: "Payment will be charged to your AppStore account upon confirmation of purchase. The subscription will automatically renew and be charged 24 hours before the end of the current period unless turned off by the user in the user's account settings. Any unused portion of the trial will be forfeited.")
   /// Settings
   internal static let tabSettings = LocalizationStrings.tr("Localizable", "tabSettings", fallback: "Settings")
   /// Check your network connection and try again

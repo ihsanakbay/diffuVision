@@ -38,6 +38,7 @@ struct Icons {
 		case logout = "power.circle.fill"
 		case delete = "trash.fill"
 		case user = "person.fill"
+		case checkmark = "checkmark"
 
 		var image: Image {
 			return Image(systemName: self.rawValue)
