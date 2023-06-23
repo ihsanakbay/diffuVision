@@ -1,0 +1,117 @@
+{
+  "identifier" : "242B187D",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "1D5E7537",
+      "localizations" : [
+
+      ],
+      "name" : "AppSubscriptions",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "12.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1C66F85C",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "Weekly Subscription",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "",
+              "displayName" : "Haftalık Abonelik",
+              "locale" : "tr"
+            }
+          ],
+          "productID" : "subscription.weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly",
+          "subscriptionGroupID" : "1D5E7537",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "C37EFBC5",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "Monthly Subscription",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "",
+              "displayName" : "Aylık Abonelik",
+              "locale" : "tr"
+            }
+          ],
+          "productID" : "subscription.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly",
+          "subscriptionGroupID" : "1D5E7537",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "179.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "91C37D20",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "Yearly Subscription",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "",
+              "displayName" : "Yıllık Abonelik",
+              "locale" : "tr"
+            }
+          ],
+          "productID" : "subscription.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly",
+          "subscriptionGroupID" : "1D5E7537",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
