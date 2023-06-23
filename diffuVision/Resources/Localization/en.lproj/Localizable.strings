@@ -15,11 +15,29 @@
 "save" = "Save";
 "share" = "Share";
 "doneButton" = "Done";
+"ok" = "OK";
+"yes" = "Yes";
+"cancel" = "Cancel";
+"none" = "None";
 "regenerate" = "Regenerate";
 "prompt" = "Enter your prompt here";
 
 "error" = "An unexpected error has occurred";
-"unreachableError" = "Check your network connection";
-"selectSize" = "Size";
-"selectEngine" = "Engine";
+"unreachableError" = "Check your network connection and try again";
+"selectSize" = "Select Size";
+"selectEngine" = "Select Engine";
 "generateImage" = "Generating image. Please wait.";
+
+"policy" = "Privacy Policy & Terms of Use";
+"feedback" = "Give us feedback";
+"premium" = "Premium";
+"logout" = "Logout";
+"deleteAccount" = "Delete your account";
+"deleteAccountConfirmationMessage" = "Your account will be permanently deleted.\nDo you confirm?";
+"user" = "User";
+
+"continue" = "Continue";
+"restore" = "Restore purchase";
+"subscriptions" = "Buy Subscription";
+"mySubscription" = "My Subscription";
+"subscriptionToC" = "Payment will be charged to your AppStore account upon confirmation of purchase. The subscription will automatically renew and be charged 24 hours before the end of the current period unless turned off by the user in the user's account settings. Any unused portion of the trial will be forfeited.";

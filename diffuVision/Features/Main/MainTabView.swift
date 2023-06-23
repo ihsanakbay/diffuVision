@@ -15,19 +15,17 @@ enum TabItems {
 struct MainTabView: View {
 	@State private var selectedTab: TabItems = .image
 
-	init() {
-		UITabBar.appearance().unselectedItemTintColor = UIColor(asset: Colors.iconColor)
-	}
-
 	var body: some View {
 		TabView(selection: $selectedTab) {
 			// MARK: - Homepage
 
 			NavigationView {
-				HomePageView()
-					.navigationTitle(LocalizationStrings.appTitle)
-					.navigationBarTitleDisplayMode(.inline)
-					.background(Colors.backgroundColor.swiftUIColor)
+				ZStack {
+					BackgroundView()
+					HomePageView()
+						.navigationTitle(LocalizationStrings.appTitle)
+						.navigationBarTitleDisplayMode(.inline)
+				}
 			}
 			.tag(TabItems.image)
 			.tabItem {
@@ -37,22 +35,25 @@ struct MainTabView: View {
 			// MARK: - Settings
 
 			NavigationView {
-				SettingsPageView()
-					.navigationTitle(LocalizationStrings.tabSettings)
-					.navigationBarTitleDisplayMode(.inline)
-					.background(Colors.backgroundColor.swiftUIColor)
+				ZStack {
+					BackgroundView()
+					SettingsPageView()
+						.navigationTitle(LocalizationStrings.tabSettings)
+						.navigationBarTitleDisplayMode(.automatic)
+				}
 			}
 			.tag(TabItems.settings)
 			.tabItem {
 				Icons.TabView.settingsTab.image
 			}
 		}
-		.tint(Colors.buttonColor.swiftUIColor)
+		.tint(Colors.buttonAndIconColor.swiftUIColor)
 	}
 }
 
 struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainTabView()
+			.environmentObject(Store())
 	}
 }

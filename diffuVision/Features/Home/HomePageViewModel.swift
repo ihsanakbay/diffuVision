@@ -6,7 +6,7 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
 @MainActor
 final class HomePageViewModel: ObservableObject {
@@ -67,7 +67,29 @@ final class HomePageViewModel: ObservableObject {
 		return true
 	}
 
+	func getSelectedEngineIdName() -> String {
+		guard let engine = engines.first(where: { $0.id == selectedEngineId }) else { return "" }
+		return engine.name
+	}
+
+	func getSelectedSizeText() -> String {
+		let size = selectedSize
+		return "\(size.width) x \(size.height)"
+	}
+
 	func clearAll() {
 		generatedImageItemModel.response = nil
 	}
+
+	func updatePremium(isPremium: Bool) async {
+		if let user = try? AuthenticationManager.shared.getAuthenticatedUser() {
+			do {
+				try await UserManager.shared.updateUserPremiumStatus(userId: user.uid, isPremium: isPremium)
+			} catch {
+				errorMessage = error.localizedDescription
+			}
+		}
+	}
+	
+	
 }

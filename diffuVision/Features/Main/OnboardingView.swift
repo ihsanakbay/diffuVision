@@ -5,12 +5,12 @@
 //  Created by İhsan Akbay on 10.06.2023.
 //
 
+import AuthenticationServices
 import RiveRuntime
 import SwiftUI
 
 struct OnboardingView: View {
-	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool?
-
+	@StateObject private var vm: OnboardingViewModel = .init()
 	private var background = RiveViewModel(fileName: "BackgroundAnimation")
 
 	var body: some View {
@@ -39,21 +39,25 @@ struct OnboardingView: View {
 					.foregroundColor(Colors.textColor.swiftUIColor)
 
 				Button {
-					isOnboarding = false
+					Task {
+						try await vm.signInWithApple()
+					}
 				} label: {
-					Text(LocalizationStrings.getStarted)
-						.frame(width: Constants.screenWidth * 0.6)
-						.padding(8)
+					SignInWithAppleButtonViewRepresentable(type: .default, style: .white)
+						.allowsHitTesting(false)
 				}
-				.buttonStyle(.borderedProminent)
+				.frame(height: 55)
 				.clipShape(Capsule())
-				.tint(Colors.buttonColor.swiftUIColor)
-				.foregroundColor(.white)
-				.fontWeight(.medium)
 				.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
+				.padding()
 			}
 			.padding(30)
 		}
+		.errorAlert(error: $vm.errorMessage)
+	}
+
+	private func auth() throws {
+		throw NetworkRequestError.badRequest
 	}
 }
 

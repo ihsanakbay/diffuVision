@@ -5,23 +5,51 @@
 //  Created by İhsan Akbay on 23.05.2023.
 //
 
+import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 @main
 struct diffuVisionApp: App {
-	@AppStorage(AppStorageKeys.isOnboarding.rawValue) var isOnboarding: Bool = true
+	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+	@StateObject var store: Store = .init()
+	@AppStorage(StorageKeys.isAuthenticated.rawValue) var isAuthenticated: Bool = false
+	@AppStorage(StorageKeys.appStartCount.rawValue) var appStartCount = 0
+
+	private func checkUserState() {
+		if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser(),
+		   !authUser.uid.isEmpty
+		{
+			isAuthenticated = true
+			countIncrement()
+			return
+		}
+		isAuthenticated = false
+	}
 
 	var body: some Scene {
 		WindowGroup {
-			if isOnboarding {
-				OnboardingView()
-					.preferredColorScheme(.dark)
+			Group {
+				if self.isAuthenticated {
+					MainTabView()
+						.preferredColorScheme(.dark)
+						.environmentObject(self.store)
+				} else {
+					OnboardingView()
+						.preferredColorScheme(.dark)
+						.environmentObject(self.store)
+				}
 			}
-			else {
-				MainTabView()
-					.preferredColorScheme(.dark)
+			.onAppear {
+				self.checkUserState()
 			}
 		}
+	}
+
+	private func countIncrement() {
+		var count = appStartCount
+		count += 1
+		appStartCount = count
 	}
 }
 
