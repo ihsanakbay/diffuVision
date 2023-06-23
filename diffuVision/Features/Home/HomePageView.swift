@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomePageView: View {
+	@AppStorage(StorageKeys.reviewAsked.rawValue) var reviewAsked = false
+	@AppStorage(StorageKeys.appStartCount.rawValue) var appStartCount: Int?
+
 	@EnvironmentObject var store: Store
 	@Environment(\.requestReview) var requestReview
 
@@ -188,9 +191,9 @@ struct HomePageView: View {
 				isPremium = store.purchasedSubscriptions.isEmpty ? false : true
 				await viewModel.updatePremium(isPremium: isPremium)
 			}
-			viewModel.countIncrement()
-			print("COUNT: \(viewModel.appStartCount)")
-			if viewModel.appStartCount > 4 {
+
+			if let count = appStartCount, count > 3, reviewAsked != true {
+				reviewAsked = true
 				DispatchQueue.main.async {
 					requestReview()
 				}

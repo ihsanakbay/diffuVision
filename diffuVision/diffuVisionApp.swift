@@ -14,15 +14,17 @@ struct diffuVisionApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 	@StateObject var store: Store = .init()
 	@AppStorage(StorageKeys.isAuthenticated.rawValue) var isAuthenticated: Bool = false
+	@AppStorage(StorageKeys.appStartCount.rawValue) var appStartCount = 0
 
 	private func checkUserState() {
 		if let authUser = try? AuthenticationManager.shared.getAuthenticatedUser(),
 		   !authUser.uid.isEmpty
 		{
-			self.isAuthenticated = true
+			isAuthenticated = true
+			countIncrement()
 			return
 		}
-		self.isAuthenticated = false
+		isAuthenticated = false
 	}
 
 	var body: some Scene {
@@ -42,6 +44,12 @@ struct diffuVisionApp: App {
 				self.checkUserState()
 			}
 		}
+	}
+
+	private func countIncrement() {
+		var count = appStartCount
+		count += 1
+		appStartCount = count
 	}
 }
 

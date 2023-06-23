@@ -10,7 +10,6 @@ import SwiftUI
 
 @MainActor
 final class HomePageViewModel: ObservableObject {
-	@AppStorage(StorageKeys.appStartCount.rawValue) var appStartCount = 0
 	@Published var request: APIParameters.TextToImageRequest = .init()
 	@Published var generatedImageItemModel: GeneratedImageItemModel = .init()
 	@Published var isGenerating: Bool = false
@@ -92,9 +91,5 @@ final class HomePageViewModel: ObservableObject {
 		}
 	}
 	
-	func countIncrement() {
-		var count = appStartCount
-		count += 1
-		appStartCount = count
-	}
+	
 }
