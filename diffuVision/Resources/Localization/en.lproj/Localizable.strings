@@ -32,6 +32,7 @@
 "feedback" = "Give us feedback";
 "premium" = "Premium";
 "logout" = "Logout";
+"logoutConfirmationMessage" = "Are you sure you want to logout?";
 "deleteAccount" = "Delete your account";
 "deleteAccountConfirmationMessage" = "Your account will be permanently deleted.\nDo you confirm?";
 "user" = "User";

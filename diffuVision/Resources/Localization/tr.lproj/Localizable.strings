@@ -33,6 +33,7 @@
 "premium" = "Premium";
 
 "logout" = "Çıkış yap";
+"logoutConfirmationMessage" = "Çıkış yapmak istediğinizden emin misiniz?";
 "deleteAccount" = "Hesabı sil";
 "deleteAccountConfirmationMessage" = "Hesabınız kalıcı olarak silinecektir. \nOnaylıyor musunuz?";
 "user" = "Kullanıcı";

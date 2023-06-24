@@ -41,6 +41,8 @@ internal enum LocalizationStrings {
   internal static let getStarted = LocalizationStrings.tr("Localizable", "getStarted", fallback: "Get Started")
   /// Logout
   internal static let logout = LocalizationStrings.tr("Localizable", "logout", fallback: "Logout")
+  /// Are you sure you want to logout?
+  internal static let logoutConfirmationMessage = LocalizationStrings.tr("Localizable", "logoutConfirmationMessage", fallback: "Are you sure you want to logout?")
   /// My Subscription
   internal static let mySubscription = LocalizationStrings.tr("Localizable", "mySubscription", fallback: "My Subscription")
   /// None
