@@ -32,6 +32,7 @@ struct GeneratedImageItemView: View {
 					image
 						.resizable()
 						.scaledToFit()
+						.frame(maxWidth: .infinity, maxHeight: .infinity)
 						.cornerRadius(10)
 						.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 
