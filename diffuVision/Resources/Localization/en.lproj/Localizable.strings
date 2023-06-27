@@ -24,14 +24,16 @@
 
 "error" = "An unexpected error has occurred";
 "unreachableError" = "Check your network connection and try again";
-"selectSize" = "Select Size";
-"selectEngine" = "Select Engine";
+"selectSize" = "Size";
+"selectEngine" = "AI Engine";
+"selectStyle" = "Style";
 "generateImage" = "Generating image. Please wait.";
 
 "policy" = "Privacy Policy & Terms of Use";
 "feedback" = "Give us feedback";
 "premium" = "Premium";
 "logout" = "Logout";
+"logoutConfirmationMessage" = "Are you sure you want to logout?";
 "deleteAccount" = "Delete your account";
 "deleteAccountConfirmationMessage" = "Your account will be permanently deleted.\nDo you confirm?";
 "user" = "User";

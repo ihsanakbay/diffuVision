@@ -14,45 +14,37 @@ struct HomePageView: View {
 	@EnvironmentObject var store: Store
 	@Environment(\.requestReview) var requestReview
 
-	@State private var prompt: String = ""
-	@StateObject private var viewModel: HomePageViewModel = .init()
+	@StateObject var viewModel: HomePageViewModel = .init()
 
 	@State private var isSizeSheetPresented = false
 	@State private var isEngineSheetPresented = false
+	@State private var isStyleSheetPresented = false
 	@State private var showSubscriptionSheet = false
 	@State private var isPremium = false
+	@State private var isSubscribed: Bool = false
 
 	var body: some View {
 		ZStack {
-			// MARK: - Size, Engine
+			// MARK: - Size, Engine, Style
 
 			VStack {
-				Button {
+				CustomListItem(title: LocalizationStrings.selectSize,
+				               subtitle: viewModel.getSelectedSizeText())
+				{
 					isSizeSheetPresented = true
-				} label: {
-					Text(LocalizationStrings.selectSize)
-						.font(.subheadline)
-						.padding(8)
-					Spacer()
-					Text(viewModel.getSelectedSizeText())
-						.font(.subheadline)
-						.padding(8)
 				}
-				.modifier(CustomListItemModifier())
 
-				Button {
+				CustomListItem(title: LocalizationStrings.selectEngine,
+				               subtitle: viewModel.getSelectedEngineIdName())
+				{
 					isEngineSheetPresented = true
-				} label: {
-					Text(LocalizationStrings.selectEngine)
-						.font(.subheadline)
-						.padding(8)
-					Spacer()
-					Text(viewModel.getSelectedEngineIdName())
-						.font(.subheadline)
-						.lineLimit(1)
-						.padding(8)
 				}
-				.modifier(CustomListItemModifier())
+
+				CustomListItem(title: LocalizationStrings.selectStyle,
+				               subtitle: viewModel.getSelectedStyleName())
+				{
+					isStyleSheetPresented = true
+				}
 
 				// MARK: - Generated Image
 
@@ -62,20 +54,19 @@ struct HomePageView: View {
 							promtMessage: viewModel.generatedImageItemModel.promtMessage,
 							response: viewModel.generatedImageItemModel.response))
 							.padding()
-					} else {
+					} else if !viewModel.isGenerating {
 						Text(LocalizationStrings.dashboardTitle)
 							.multilineTextAlignment(.center)
 							.padding(20)
 					}
 				}
 
-				// MARK: - Promt texr field and generate button
+				// MARK: - Promt text field and generate button
 
-				PrompTextfieldView(prompt: $prompt) {
+				PrompTextfieldView(prompt: $viewModel.prompt) {
 					if isPremium {
 						viewModel.clearAll()
 						viewModel.generateImage()
-						prompt = ""
 					} else {
 						showSubscriptionSheet.toggle()
 					}
@@ -86,7 +77,7 @@ struct HomePageView: View {
 			.onAppear(perform: {
 				viewModel.fetchEngineList()
 			})
-			.onChange(of: prompt) { newValue in
+			.onChange(of: viewModel.prompt) { newValue in
 				viewModel.setTextPrompt(prompt: APIParameters.TextPrompt(text: newValue))
 			}
 
@@ -100,94 +91,39 @@ struct HomePageView: View {
 				.tint(Colors.buttonAndIconColor.swiftUIColor)
 			} else { EmptyView() }
 		}
+		.errorAlert(error: $viewModel.errorMessage)
 		.sheet(isPresented: $isSizeSheetPresented) {
-			NavigationView {
-				List {
-					ForEach(Size.sizes, id: \.self) { size in
-						HStack {
-							Text("\(size.width) x \(size.height)")
-							if size == viewModel.selectedSize {
-								Spacer()
-								Image(systemName: Icons.Button.checkmark.rawValue)
-							}
-						}
-						.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
-						.onTapGesture {
-							viewModel.selectedSize = size
-							isSizeSheetPresented = false
-						}
-					}
-				}
-				.navigationTitle(LocalizationStrings.selectSize)
-				.navigationBarTitleDisplayMode(.inline)
-				.toolbar {
-					ToolbarItem(placement: .navigationBarTrailing) {
-						Button {
-							isSizeSheetPresented.toggle()
-						} label: {
-							Text(LocalizationStrings.doneButton)
-						}
-					}
-				}
-				.scrollContentBackground(.hidden)
-				.background(Colors.backgroundColor.swiftUIColor)
-			}
-			.presentationDetents([.medium])
+			SizeSheetView(isSizeSheetPresented: $isSizeSheetPresented)
+				.environmentObject(viewModel)
 		}
 		.sheet(isPresented: $isEngineSheetPresented) {
-			NavigationView {
-				List {
-					ForEach(viewModel.engines, id: \.id) { engine in
-						HStack {
-							Text("\(engine.name)")
-
-							if engine.id == viewModel.selectedEngineId {
-								Spacer()
-								Image(systemName: Icons.Button.checkmark.rawValue)
-							}
-						}
-						.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
-						.onTapGesture {
-							viewModel.selectedEngineId = engine.id
-							isEngineSheetPresented = false
-						}
-					}
-				}
-				.navigationTitle(LocalizationStrings.selectEngine)
-				.navigationBarTitleDisplayMode(.inline)
-				.toolbar {
-					ToolbarItem(placement: .navigationBarTrailing) {
-						Button {
-							isEngineSheetPresented.toggle()
-						} label: {
-							Text(LocalizationStrings.doneButton)
-						}
-					}
-				}
-				.scrollContentBackground(.hidden)
-				.background(Colors.backgroundColor.swiftUIColor)
-			}
+			AIEngineSheetView(isEngineSheetPresented: $isEngineSheetPresented)
+				.environmentObject(viewModel)
 		}
-		.fullScreenCover(isPresented: $showSubscriptionSheet) {
-			NavigationView {
-				SubscriptionListView()
-					.navigationBarTitleDisplayMode(.inline)
-					.navigationTitle(LocalizationStrings.subscriptions)
-					.toolbar {
-						ToolbarItem(placement: .navigationBarTrailing) {
-							Button {
-								showSubscriptionSheet.toggle()
-							} label: {
-								Text(LocalizationStrings.doneButton)
-							}
-						}
-					}
-			}
-			.presentationDetents([.medium, .large])
+		.sheet(isPresented: $isStyleSheetPresented) {
+			StyleSheetView(isStyleSheetPresented: $isStyleSheetPresented)
+				.environmentObject(viewModel)
 		}
-		.onAppear {
+		.fullScreenCover(isPresented: $showSubscriptionSheet, onDismiss: {
+			isPremium = store.purchasedSubscriptions.isEmpty ? false : true
+			Task {
+				await viewModel.updatePremium(isPremium: isPremium)
+			}
+		}) {
+			SubscriptionSheetView(isSubscribed: $isSubscribed)
+		}
+		.onChange(of: store.purchasedSubscriptions, perform: { _ in
 			Task {
 				await store.updateCustomerProductStatus()
+				isPremium = store.purchasedSubscriptions.isEmpty ? false : true
+				await viewModel.updatePremium(isPremium: isPremium)
+			}
+		})
+		.onChange(of: isSubscribed, perform: { _ in
+			showSubscriptionSheet = false
+		})
+		.onAppear {
+			Task {
 				isPremium = store.purchasedSubscriptions.isEmpty ? false : true
 				await viewModel.updatePremium(isPremium: isPremium)
 			}
@@ -199,17 +135,6 @@ struct HomePageView: View {
 				}
 			}
 		}
-	}
-}
-
-private struct CustomListItemModifier: ViewModifier {
-	func body(content: Content) -> some View {
-		content
-			.frame(height: 42)
-			.background(Colors.secondaryBackgroundColor.swiftUIColor)
-			.cornerRadius(10)
-			.padding([.horizontal], 16)
-			.tint(Colors.textColor.swiftUIColor)
 	}
 }
 

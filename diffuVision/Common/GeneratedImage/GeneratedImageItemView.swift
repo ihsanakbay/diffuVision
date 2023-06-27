@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GeneratedImageItemView: View {
 	var model: GeneratedImageItemModel
-	@State private var isShareSheetPresented = false
+	@State var isShareSheetPresented = false
 
 	var body: some View {
 		VStack {
@@ -32,6 +32,7 @@ struct GeneratedImageItemView: View {
 					image
 						.resizable()
 						.scaledToFit()
+						.frame(maxWidth: .infinity, maxHeight: .infinity)
 						.cornerRadius(10)
 						.shadow(color: Colors.shadowColor.swiftUIColor, radius: 10)
 
@@ -59,24 +60,6 @@ struct GeneratedImageItemView: View {
 				ShareSheetView(activityItems: [image])
 			}
 		}
-	}
-}
-
-extension GeneratedImageItemView {
-	private func saveImageToGallery() {
-		if let response = model.response,
-		   !response.artifacts.isEmpty,
-		   let base64 = response.artifacts[0].base64,
-		   let imageData = Data(base64Encoded: base64),
-		   let image = UIImage(data: imageData)
-		{
-			let imageSaver = ImageSaver()
-			imageSaver.writeToPhotoAlbum(image: image)
-		}
-	}
-
-	private func showShareImage() {
-		self.isShareSheetPresented.toggle()
 	}
 }
 

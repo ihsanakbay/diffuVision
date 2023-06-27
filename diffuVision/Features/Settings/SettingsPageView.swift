@@ -9,91 +9,40 @@ import SwiftUI
 
 struct SettingsPageView: View {
 	@Environment(\.requestReview) var requestReview
-	@StateObject private var vm = SettingsViewModel()
-	@State private var isPrivacyPolicyShow: Bool = false
-	@State private var showDeleteAccountAlert: Bool = false
-	@State private var showSubscriptionSheet: Bool = false
+	@StateObject var viewModel = SettingsViewModel()
+	@State var showPrivacyPolicy: Bool = false
+	@State var showLogoutAlert: Bool = false
+	@State var showDeleteAccountAlert: Bool = false
+	@State var showSubscriptionSheet: Bool = false
+	@State var isSubscribed: Bool = false
 
 	var body: some View {
 		List {
-			Section(LocalizationStrings.user) {
-				HStack {
-					Image(systemName: Icons.General.user.rawValue)
-						.foregroundColor(Colors.buttonAndIconColor.swiftUIColor)
-					Text(vm.getUserEmail())
-				}
-			}
-			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
+			userSection()
 
-			Section {
-				Button {
-					DispatchQueue.main.async {
-						requestReview()
-					}
+			appActionSection()
 
-				} label: {
-					HStack {
-						Image(systemName: Icons.Button.feedback.rawValue)
-							.tint(Colors.buttonAndIconColor.swiftUIColor)
-						Text(LocalizationStrings.feedback)
-					}
-				}
+			premiumSection()
 
-				Button {
-					isPrivacyPolicyShow.toggle()
-				} label: {
-					HStack {
-						Image(systemName: Icons.Button.policy.rawValue)
-							.tint(Colors.buttonAndIconColor.swiftUIColor)
-						Text(LocalizationStrings.policy)
-					}
-				}
-			}
-			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
-
-			Section {
-				Button {
-					showSubscriptionSheet.toggle()
-				} label: {
-					HStack {
-						Image(systemName: Icons.Button.premium.rawValue)
-							.tint(Colors.buttonAndIconColor.swiftUIColor)
-						Text(LocalizationStrings.premium)
-					}
-				}
-			}
-			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
-
-			Section {
-				Button {
-					vm.logout()
-				} label: {
-					HStack {
-						Image(systemName: Icons.General.logout.rawValue)
-							.tint(Colors.buttonAndIconColor.swiftUIColor)
-						Text(LocalizationStrings.logout)
-							.foregroundColor(Colors.buttonAndIconColor.swiftUIColor)
-					}
-				}
-
-//				Button {
-//					self.showDeleteAccountAlert.toggle()
-//				} label: {
-//					HStack {
-//						Image(systemName: Icons.General.delete.rawValue)
-//							.tint(Colors.buttonAndIconColor.swiftUIColor)
-//						Text(LocalizationStrings.deleteAccount)
-//							.foregroundColor(Colors.buttonAndIconColor.swiftUIColor)
-//					}
-//				}
-			}
-			.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
+			authSection()
 		}
-		.errorAlert(error: $vm.errorMessage)
+		.errorAlert(error: $viewModel.errorMessage)
+		.confirmationDialog("", isPresented: $showLogoutAlert, actions: {
+			Button(LocalizationStrings.yes, role: .destructive) {
+				Task {
+					viewModel.logout()
+				}
+			}
+			Button(LocalizationStrings.cancel, role: .cancel) {
+				showLogoutAlert.toggle()
+			}
+		}, message: {
+			Text(LocalizationStrings.logoutConfirmationMessage)
+		})
 		.confirmationDialog("", isPresented: $showDeleteAccountAlert, actions: {
 			Button(LocalizationStrings.yes, role: .destructive) {
 				Task {
-					await vm.deleteAccount()
+					await viewModel.deleteAccount()
 				}
 			}
 			Button(LocalizationStrings.cancel, role: .cancel) {
@@ -105,38 +54,11 @@ struct SettingsPageView: View {
 		.listStyle(.insetGrouped)
 		.scrollContentBackground(.hidden)
 		.tint(Colors.textColor.swiftUIColor)
-		.sheet(isPresented: $isPrivacyPolicyShow) {
-			NavigationView {
-				WebView(url: URL(string: Constants.privacyPolicyLink)!)
-					.ignoresSafeArea()
-					.navigationBarTitleDisplayMode(.inline)
-					.toolbar {
-						ToolbarItem(placement: .navigationBarTrailing) {
-							Button {
-								isPrivacyPolicyShow.toggle()
-							} label: {
-								Text(LocalizationStrings.doneButton)
-							}
-						}
-					}
-			}
+		.sheet(isPresented: $showPrivacyPolicy) {
+			PrivacyPolicySheetView(showPrivacyPolicy: $showPrivacyPolicy)
 		}
 		.fullScreenCover(isPresented: $showSubscriptionSheet) {
-			NavigationView {
-				SubscriptionListView()
-					.navigationBarTitleDisplayMode(.inline)
-					.navigationTitle(LocalizationStrings.subscriptions)
-					.toolbar {
-						ToolbarItem(placement: .navigationBarTrailing) {
-							Button {
-								showSubscriptionSheet.toggle()
-							} label: {
-								Text(LocalizationStrings.doneButton)
-							}
-						}
-					}
-			}
-			.presentationDetents([.medium, .large])
+			SubscriptionSheetView(showSubscriptionSheet: $showSubscriptionSheet, isSubscribed: $isSubscribed)
 		}
 	}
 }

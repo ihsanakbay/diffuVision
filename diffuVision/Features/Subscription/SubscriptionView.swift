@@ -13,7 +13,7 @@ struct SubscriptionView: View {
 	@State var currentSubscription: Product?
 	@State var status: Product.SubscriptionInfo.Status?
 
-	@State var isSubscribed: Bool = false
+	@Binding var isSubscribed: Bool
 	@State var errorMessage: Swift.Error?
 
 	var availableSubscriptions: [Product] {
@@ -24,7 +24,7 @@ struct SubscriptionView: View {
 		Group {
 			if let currentSubscription = currentSubscription {
 				Section(LocalizationStrings.mySubscription) {
-					SubscriptionCellView(product: currentSubscription, purchasingEnabled: false)
+					SubscriptionCellView(isPurchased: $isSubscribed, product: currentSubscription, purchasingEnabled: false)
 					if let status = status {
 						SubscriptionStatusView(product: currentSubscription, status: status)
 					}
@@ -34,11 +34,12 @@ struct SubscriptionView: View {
 
 			Section(LocalizationStrings.subscriptions) {
 				ForEach(availableSubscriptions) { product in
-					SubscriptionCellView(product: product)
+					SubscriptionCellView(isPurchased: $isSubscribed, product: product, purchasingEnabled: true)
 				}
 			}
 			.listStyle(GroupedListStyle())
 		}
+
 		.errorAlert(error: $errorMessage)
 		.onAppear {
 			Task {
@@ -69,8 +70,6 @@ extension SubscriptionView {
 	private func restore() async {
 		try? await AppStore.sync()
 	}
-
-	
 
 	@MainActor
 	func updateSubscriptionStatus() async {
@@ -129,7 +128,7 @@ extension SubscriptionView {
 
 struct SubscriptionView_Previews: PreviewProvider {
 	static var previews: some View {
-		SubscriptionView()
+		SubscriptionView(isSubscribed: .constant(false))
 			.environmentObject(Store())
 	}
 }
