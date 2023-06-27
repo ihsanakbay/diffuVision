@@ -18,7 +18,7 @@ struct PrompTextfieldView: View {
 				// MARK: - Prompt textfield
 
 				TextField(LocalizationStrings.prompt,
-				          text: $prompt.max(300),
+				          text: $prompt,
 				          axis: .vertical)
 					.foregroundColor(Colors.textColor.swiftUIColor)
 					.padding(8)

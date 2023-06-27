@@ -24,8 +24,9 @@
 
 "error" = "Beklenmedik bir hata oluştu";
 "unreachableError" = "İnternet bağlantınızı kontrol edin ve tekrar deneyin";
-"selectSize" = "Boyut Seç";
-"selectEngine" = "Model Seç";
+"selectSize" = "Boyut";
+"selectStyle" = "Stil";
+"selectEngine" = "AI Model";
 "generateImage" = "Görüntü oluşturuluyor. Lütfen Bekleyiniz.";
 
 "policy" = "Gizlilik Politikası & Kullanım Koşulları";

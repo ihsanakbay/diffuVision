@@ -31,10 +31,11 @@ extension SettingsPageView {
 
 	struct SubscriptionSheetView: View {
 		@Binding var showSubscriptionSheet: Bool
+		@Binding var isSubscribed: Bool
 
 		var body: some View {
 			NavigationView {
-				SubscriptionListView()
+				SubscriptionListView(isSubscribed: $isSubscribed)
 					.navigationBarTitleDisplayMode(.inline)
 					.navigationTitle(LocalizationStrings.subscriptions)
 					.toolbar {
@@ -51,6 +52,7 @@ extension SettingsPageView {
 		}
 	}
 
+	@ViewBuilder
 	func premiumSection() -> some View {
 		Section {
 			Button {
@@ -66,6 +68,7 @@ extension SettingsPageView {
 		.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 	}
 
+	@ViewBuilder
 	func userSection() -> some View {
 		Section(LocalizationStrings.user) {
 			HStack {
@@ -77,6 +80,7 @@ extension SettingsPageView {
 		.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 	}
 
+	@ViewBuilder
 	func appActionSection() -> some View {
 		Section {
 			Button {
@@ -105,6 +109,7 @@ extension SettingsPageView {
 		.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 	}
 
+	@ViewBuilder
 	func authSection() -> some View {
 		Section {
 			Button {

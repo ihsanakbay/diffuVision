@@ -10,16 +10,11 @@ import SwiftUI
 
 struct SubscriptionCellView: View {
 	@EnvironmentObject var store: Store
-	@State var isPurchased: Bool = false
 	@State var errorMessage: Swift.Error?
+	@Binding var isPurchased: Bool
 
 	let product: Product
 	let purchasingEnabled: Bool
-
-	init(product: Product, purchasingEnabled: Bool = true) {
-		self.product = product
-		self.purchasingEnabled = purchasingEnabled
-	}
 
 	var body: some View {
 		HStack {

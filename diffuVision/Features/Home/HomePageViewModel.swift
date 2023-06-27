@@ -13,16 +13,22 @@ final class HomePageViewModel: ObservableObject {
 	@Published var request: APIParameters.TextToImageRequest = .init()
 	@Published var generatedImageItemModel: GeneratedImageItemModel = .init()
 	@Published var isGenerating: Bool = false
-	@Published var errorMessage: String = ""
+	@Published var errorMessage: Swift.Error?
 	@Published var selectedSize: Size = .init(width: 512, height: 512)
+	@Published var selectedStyle: StylePreset = .init(id: "none", name: "None")
 	@Published var engines: [AIEngine] = .init()
 	@Published var selectedEngineId: String = Constants.engineId
+	@Published var prompt: String = ""
 	private var cancelable = Set<AnyCancellable>()
 
 	func generateImage() {
 		isGenerating = true
 		request.width = selectedSize.width
 		request.height = selectedSize.height
+
+		if selectedStyle.id != StylePreset.StylePresets.none.rawValue {
+			request.stylePreset = selectedStyle.id
+		}
 
 		ApiClient.dispatch(ApiRouter.GenerateImage(body: request, engine: selectedEngineId))
 			.sink { [weak self] completion in
@@ -32,11 +38,12 @@ final class HomePageViewModel: ObservableObject {
 					Log.info("Successfully generated image")
 				case .failure(let error):
 					Log.error("Unable to generate image \(error)")
-					self?.errorMessage = error.localizedDescription
+					self?.errorMessage = error
 				}
 			} receiveValue: { [weak self] response in
 				self?.generatedImageItemModel.response = response
 				self?.generatedImageItemModel.promtMessage = self?.request.textPrompts[0].text
+				self?.prompt = ""
 			}
 			.store(in: &cancelable)
 	}
@@ -49,7 +56,7 @@ final class HomePageViewModel: ObservableObject {
 					Log.info("Successfully fetched models")
 				case .failure(let error):
 					Log.error("Unable to fetched models \(error)")
-					self?.errorMessage = error.localizedDescription
+					self?.errorMessage = error
 				}
 			} receiveValue: { [weak self] response in
 				self?.engines = response
@@ -72,6 +79,11 @@ final class HomePageViewModel: ObservableObject {
 		return engine.name
 	}
 
+	func getSelectedStyleName() -> String {
+		let style = selectedStyle
+		return style.name.description
+	}
+
 	func getSelectedSizeText() -> String {
 		let size = selectedSize
 		return "\(size.width) x \(size.height)"
@@ -86,10 +98,8 @@ final class HomePageViewModel: ObservableObject {
 			do {
 				try await UserManager.shared.updateUserPremiumStatus(userId: user.uid, isPremium: isPremium)
 			} catch {
-				errorMessage = error.localizedDescription
+				errorMessage = error
 			}
 		}
 	}
-	
-	
 }

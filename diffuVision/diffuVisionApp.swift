@@ -43,6 +43,9 @@ struct diffuVisionApp: App {
 			.onAppear {
 				self.checkUserState()
 			}
+			.task {
+				await updateSubscription()
+			}
 		}
 	}
 
@@ -50,6 +53,10 @@ struct diffuVisionApp: App {
 		var count = appStartCount
 		count += 1
 		appStartCount = count
+	}
+
+	private func updateSubscription() async {
+		await store.updateCustomerProductStatus()
 	}
 }
 

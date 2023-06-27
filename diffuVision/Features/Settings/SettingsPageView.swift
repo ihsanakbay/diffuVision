@@ -14,6 +14,7 @@ struct SettingsPageView: View {
 	@State var showLogoutAlert: Bool = false
 	@State var showDeleteAccountAlert: Bool = false
 	@State var showSubscriptionSheet: Bool = false
+	@State var isSubscribed: Bool = false
 
 	var body: some View {
 		List {
@@ -57,7 +58,7 @@ struct SettingsPageView: View {
 			PrivacyPolicySheetView(showPrivacyPolicy: $showPrivacyPolicy)
 		}
 		.fullScreenCover(isPresented: $showSubscriptionSheet) {
-			SubscriptionSheetView(showSubscriptionSheet: $showSubscriptionSheet)
+			SubscriptionSheetView(showSubscriptionSheet: $showSubscriptionSheet, isSubscribed: $isSubscribed)
 		}
 	}
 }

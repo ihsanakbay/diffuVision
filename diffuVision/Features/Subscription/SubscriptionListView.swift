@@ -10,10 +10,11 @@ import SwiftUI
 
 struct SubscriptionListView: View {
 	@EnvironmentObject var store: Store
+	@Binding var isSubscribed: Bool
 
 	var body: some View {
 		List {
-			SubscriptionView()
+			SubscriptionView(isSubscribed: $isSubscribed)
 				.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 
 			Button(LocalizationStrings.restore, action: {
@@ -38,7 +39,7 @@ struct SubscriptionListView: View {
 
 struct SubscriptionListView_Previews: PreviewProvider {
 	static var previews: some View {
-		SubscriptionListView()
+		SubscriptionListView(isSubscribed: .constant(false))
 			.environmentObject(Store())
 	}
 }
