@@ -14,6 +14,11 @@ struct SubscriptionListView: View {
 
 	var body: some View {
 		List {
+			Text(LocalizationStrings.subscriptionsDescription)
+				.font(.title3)
+				.multilineTextAlignment(.center)
+				.foregroundColor(Colors.textColor.swiftUIColor)
+
 			SubscriptionView(isSubscribed: $isSubscribed)
 				.listRowBackground(Colors.secondaryBackgroundColor.swiftUIColor)
 
