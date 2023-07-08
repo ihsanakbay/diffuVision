@@ -1,8 +1,8 @@
-/* 
+/*
   Localizable.strings
-  diffuVision
+  diffuVision.AI
 
-  Created by İhsan Akbay on 23.05.2023.
+  Created by İhsan Akbay on 29.06.2023.
   
 */
 
@@ -10,7 +10,8 @@
 "appDescription" = "AI Image Generator";
 "onboardMessage" = "Yaratıcı fikirlerinizi çarpıcı görüntülere dönüştürün";
 "getStarted" = "Başlayın";
-"dashboardTitle" = "Henüz bir resim oluşturmadınız.\nMetninizi girin ve fikirlerinizi resme dökün.";
+//"dashboardTitle" = "Henüz bir resim oluşturmadınız.\nMetninizi girin ve fikirlerinizi resme dökün.";
+"dashboardTitle" = "Metninizi girin ve fikirlerinizi resme dökün";
 "tabSettings" = "Ayarlar";
 "save" = "Kaydet";
 "share" = "Paylaş";
@@ -23,13 +24,17 @@
 "prompt" = "Buraya metninizi girin";
 
 "error" = "Beklenmedik bir hata oluştu";
+"errorTitle" = "Birşeyler ters gitti";
+"imageSaveError" = "Resim kaydedilirken bir hata oluştu";
+"imageSaveSuccess" = "Resim başarıyla kaydedildi";
 "unreachableError" = "İnternet bağlantınızı kontrol edin ve tekrar deneyin";
 "selectSize" = "Boyut";
 "selectStyle" = "Stil";
 "selectEngine" = "AI Model";
 "generateImage" = "Görüntü oluşturuluyor. Lütfen Bekleyiniz.";
 
-"policy" = "Gizlilik Politikası & Kullanım Koşulları";
+"policy" = "Gizlilik Politikası";
+"tou" = "Kullanım Koşulları";
 "feedback" = "Bize geri bildirim yapın";
 "premium" = "Premium";
 
@@ -37,10 +42,20 @@
 "logoutConfirmationMessage" = "Çıkış yapmak istediğinizden emin misiniz?";
 "deleteAccount" = "Hesabı sil";
 "deleteAccountConfirmationMessage" = "Hesabınız kalıcı olarak silinecektir. \nOnaylıyor musunuz?";
+"deletedSuccessfully" = "Hesabınız Silindi";
 "user" = "Kullanıcı";
 
 "continue" = "Devam et";
 "restore" = "Satın almayı geri yükle";
-"subscriptions" = "Abonelik Satın Al";
+"subscriptions" = "Abonelikler";
+"allPlans" = "Tüm Abonelik Planları";
 "mySubscription" = "Aboneliklerim";
+"noSubs" = "Herhangi bir boneliğin bulunmuyor";
+"yourSubs" = "Aboneliğin:\n%@";
+"subscriptionsDescription" = "Abone olarak yaratıcı fikirlerinizi çarpıcı görüntülere dönüştürün";
 "subscriptionToC" = "Ödeme, satın alma onayının ardından AppStore hesabınızdan tahsil edilecektir. Abonelik, kullanıcının hesap ayarlarında kullanıcı tarafından kapatılmadığı sürece, cari dönemin bitiminden 24 saat önce otomatik olarak yenilenecek ve ücretlendirilecektir. Denemenin kullanılmayan kısmı kaybedilecektir.";
+
+
+"sampler" = "Örnekleyici";
+"steps" = "Adımlar";
+"select" = "Seç";

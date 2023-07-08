@@ -73,6 +73,8 @@ internal enum LocalizationStrings {
   internal static let share = LocalizationStrings.tr("Localizable", "share", fallback: "Share")
   /// Buy Subscription
   internal static let subscriptions = LocalizationStrings.tr("Localizable", "subscriptions", fallback: "Buy Subscription")
+  /// You can start using the application by subscribing
+  internal static let subscriptionsDescription = LocalizationStrings.tr("Localizable", "subscriptionsDescription", fallback: "You can start using the application by subscribing")
   /// Payment will be charged to your AppStore account upon confirmation of purchase. The subscription will automatically renew and be charged 24 hours before the end of the current period unless turned off by the user in the user's account settings. Any unused portion of the trial will be forfeited.
   internal static let subscriptionToC = LocalizationStrings.tr("Localizable", "subscriptionToC", fallback: "Payment will be charged to your AppStore account upon confirmation of purchase. The subscription will automatically renew and be charged 24 hours before the end of the current period unless turned off by the user in the user's account settings. Any unused portion of the trial will be forfeited.")
   /// Settings
